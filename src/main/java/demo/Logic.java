@@ -28,24 +28,30 @@ public class Logic {
                 .map(x -> x - '0')
                 .boxed()
                 .collect(Collectors.toList());
-
-        numbers.stream().forEach(System.out::println);
     }
 
     public int getMax() {
-        return 0;
+        return numbers.stream()
+                .max(Integer::compare)
+                .get();
     }
 
     public int getMin() {
-        return 0;
+        return numbers.stream()
+                .min(Integer::compareTo)
+                .get();
     }
 
     public int getAvg() {
-        return 0;
+        var sum = numbers.stream()
+                .reduce(0, (x, y) -> x + y);
+
+        return sum / numbers.size();
     }
 
     public int getSum() {
-        return 0;
+        return numbers.stream()
+                .reduce(0, (x, y) -> x + y);
     }
 
     public String getSource() {

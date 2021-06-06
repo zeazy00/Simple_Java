@@ -3,8 +3,6 @@ package demo;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import static java.lang.String.*;
-
 public class Program {
     public static void main(String[] args) throws Exception {
         String input = input();
