@@ -21,19 +21,19 @@ public class Logic {
     }
 
     public int getMax(){
-
+        return  0;
     }
 
     public int getMin(){
-
+        return  0;
     }
 
     public int getAvg(){
-
+        return  0;
     }
 
     public int getSum(){
-
+        return  0;
     }
 
     public String getSource() {
