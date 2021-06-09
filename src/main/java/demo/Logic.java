@@ -1,5 +1,6 @@
 package demo;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,13 +8,15 @@ public class Logic {
     private List<Integer> numbers;
     private String source;
 
-    public Logic(String number) {
-        if (number == null)
+    public Logic(int[] input) {
+        if (input == null)
             throw new NullPointerException();
 
-        source = number;
-        numbers = number.chars()
-                .map(x -> x - '0')
+        source = "";
+        Arrays.stream(input)
+                .forEach(x-> source = source + String.valueOf(x));  //получение
+
+        this.numbers = Arrays.stream(input)
                 .boxed()
                 .collect(Collectors.toList());
     }
@@ -31,10 +34,7 @@ public class Logic {
     }
 
     public int getAvg() {
-        var sum = numbers.stream()
-                .reduce(0, (x, y) -> x + y);
-
-        return sum / numbers.size();
+        return getSum() / numbers.size();
     }
 
     public int getSum() {

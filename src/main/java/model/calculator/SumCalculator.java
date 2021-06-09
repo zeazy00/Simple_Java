@@ -1,4 +1,14 @@
 package model.calculator;
 
-public class SumCalculator {
+public class SumCalculator extends  AbstractCalculation{
+
+    public SumCalculator(int[] input) {
+        super(input);
+    }
+
+    @Override
+    public int execute() {
+        return numbers.stream()
+                .reduce(0, (x, y) -> x + y);
+    }
 }

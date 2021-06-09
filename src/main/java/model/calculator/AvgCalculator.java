@@ -1,4 +1,14 @@
 package model.calculator;
 
-public class AvgCalculator {
+public class AvgCalculator extends AbstractCalculation {
+    public AvgCalculator(int[] input) {
+        super(input);
+    }
+
+    @Override
+    public int execute() {
+        int sum = numbers.stream()
+                .reduce(0, (x, y) -> x + y);
+        return sum / numbers.size();
+    }
 }
