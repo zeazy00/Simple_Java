@@ -1,5 +1,7 @@
 package demo;
 
+import model.DataValidation;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -30,7 +32,7 @@ public class Program {
                 new InputStreamReader(System.in));
 
         var input = reader.readLine();
-        while (Logic.validate(input) == false){
+        while (DataValidation.validate(input) == false){
             System.out.println("Invalid input\nTry again!");
             input = reader.readLine();
         }
