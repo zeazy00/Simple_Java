@@ -1,6 +1,7 @@
 package demo;
 
 import model.DataValidation;
+import model.ToArrayParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,7 +9,9 @@ import java.io.InputStreamReader;
 public class Program {
     public static void main(String[] args) throws Exception {
         String input = input();
-        var app = new Logic(input);
+        int[] data = ToArrayParser.parseFromString(input);
+
+        Logic app = new Logic(data);
         output(app);
     }
 
@@ -28,10 +31,10 @@ public class Program {
 
     private static String input() throws Exception{
         System.out.println("Enter number:");
-        var reader = new BufferedReader(
+        BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
 
-        var input = reader.readLine();
+        String input = reader.readLine();
         while (DataValidation.validate(input) == false){
             System.out.println("Invalid input\nTry again!");
             input = reader.readLine();
