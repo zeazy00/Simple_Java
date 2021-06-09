@@ -5,7 +5,11 @@ public class ToArrayParser {
         int[] res = new int[input.length()];
 
         for (int i = 0; i < input.length(); i++) {
-            res[i] = Character.getNumericValue(input.charAt(i));
+            int digit = Character.getNumericValue(input.charAt(i));
+            if (digit > 9 || digit < 0)
+                throw new IllegalArgumentException("Input string must contain digits only!");
+
+            res[i] = digit;
         }
 
         return res;
