@@ -3,15 +3,25 @@ package controller;
 import model.DataValidation;
 import model.ToArrayParser;
 import model.calculator.AbstractCalculation;
+import model.calculator.MaxCalculator;
 import model.calculator.SumCalculator;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Controller
 public class CalculationController {
 
-    public CalculationController() {
+    BeanFactory beanFactory;
+
+    @Autowired
+    public CalculationController(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+
         start();
     }
 
@@ -19,7 +29,8 @@ public class CalculationController {
         String input = input();
         int[] data = ToArrayParser.parseFromString(input);
 
-        output(new SumCalculator(data));
+        AbstractCalculation calculation = beanFactory.getBean(AbstractCalculation.class, data);
+        output(calculation);
     }
 
     private void output(AbstractCalculation calculation) {

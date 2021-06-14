@@ -1,5 +1,8 @@
 package model.calculator;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MaxCalculator extends  AbstractCalculation{
 
     public MaxCalculator(int[] input){
