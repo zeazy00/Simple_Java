@@ -13,16 +13,16 @@ import calculations.Program;
 import java.util.Arrays;
 
 @SpringBootTest(classes = Program.class)
-@ContextConfiguration(classes = {CalculationController.class, SumCalculator.class})
+//@ContextConfiguration(classes = {CalculationController.class, SumCalculator.class})
 public class ControllerTest {
 
     @Autowired
     CalculationController ctrl;
 
     @Test
-    public void checkExecution(){
+    public void checkExecution() {
 
-        int[] data = {1,14,23,44,78,96,452};
+        int[] data = {1, 14, 23, 44, 78, 96, 452};
 
         AbstractCalculation sumCalc = ctrl.getCalculation(data);
 
