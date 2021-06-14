@@ -8,6 +8,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
 <!--    <bean id="sum" class="calculations.model.calculator.SumCalculator">-->
 <!--        <description>Sum operation</description>-->
 <!--    </bean>-->
@@ -26,5 +27,6 @@
 
     <context:component-scan base-package="calculations.controller"/>
     <context:component-scan base-package="calculations.model.calculator"/>
+<!--    <context:component-scan base-package="calculations.config"/>-->
     <context:component-scan base-package="calculations"/>
 </beans>

@@ -1,14 +1,14 @@
 package calculations;
 
+import calculations.config.AppConfig;
 import calculations.controller.CalculationController;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
-//@EnableConfigurationProperties({AppConfig.class})
+//@EnableConfigurationProperties(AppConfig.class)
 public class Program {
     public static void main(String[] args) {
         ApplicationContext context = configureContext(args);
@@ -19,11 +19,11 @@ public class Program {
         context.getBean(CalculationController.class).start();
     }
 
-    private static ApplicationContext configureContext(String[] args){
-        return SpringApplication.run(Program.class, args);
-    }
-
 //    private static ApplicationContext configureContext(String[] args){
-//        return new ClassPathXmlApplicationContext("beans.xml");
+//        return SpringApplication.run(Program.class, args);
 //    }
+
+    private static ApplicationContext configureContext(String[] args){
+        return new ClassPathXmlApplicationContext("beans.xml");
+    }
 }
