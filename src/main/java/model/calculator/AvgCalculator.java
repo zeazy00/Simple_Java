@@ -1,8 +1,9 @@
 package model.calculator;
 
 public class AvgCalculator extends AbstractCalculation {
+
     public AvgCalculator(int[] input) {
-        super(input);
+        super(input, "Avg");
     }
 
     @Override

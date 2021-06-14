@@ -3,7 +3,7 @@ package model.calculator;
 public class MaxCalculator extends  AbstractCalculation{
 
     public MaxCalculator(int[] input){
-        super(input);
+        super(input, "Max");
     }
 
     @Override

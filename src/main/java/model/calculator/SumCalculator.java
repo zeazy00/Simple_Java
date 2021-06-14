@@ -3,7 +3,7 @@ package model.calculator;
 public class SumCalculator extends  AbstractCalculation{
 
     public SumCalculator(int[] input) {
-        super(input);
+        super(input, "Sum");
     }
 
     @Override

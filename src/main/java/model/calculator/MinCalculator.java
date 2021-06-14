@@ -2,7 +2,7 @@ package model.calculator;
 
 public class MinCalculator extends  AbstractCalculation{
     public MinCalculator(int[] input) {
-        super(input);
+        super(input, "Min");
     }
 
     @Override
