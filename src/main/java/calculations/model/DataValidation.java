@@ -1,4 +1,4 @@
-package model;
+package calculations.model;
 
 public class DataValidation {
 
