@@ -1,8 +1,8 @@
-package testing;
+package testing.Spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import program.Program;
+import calculations.Program;
 
 @SpringBootTest(classes = Program.class)
 public class CalculationSpringBootTest {
