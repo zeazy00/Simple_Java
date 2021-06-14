@@ -1,4 +1,4 @@
-package model.calculator;
+package calculations.model.calculator;
 
 import org.springframework.stereotype.Service;
 

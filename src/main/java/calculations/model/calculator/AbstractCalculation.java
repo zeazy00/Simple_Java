@@ -1,4 +1,4 @@
-package model.calculator;
+package calculations.model.calculator;
 
 import java.util.Arrays;
 import java.util.List;

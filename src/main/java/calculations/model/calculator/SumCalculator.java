@@ -1,4 +1,4 @@
-package model.calculator;
+package calculations.model.calculator;
 
 public class SumCalculator extends  AbstractCalculation{
 

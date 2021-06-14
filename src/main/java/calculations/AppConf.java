@@ -1,4 +1,4 @@
-package program;
+package calculations;
 
 import org.springframework.context.annotation.Configuration;
 
