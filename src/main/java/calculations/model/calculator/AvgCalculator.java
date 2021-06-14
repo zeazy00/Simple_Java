@@ -1,8 +1,10 @@
 package calculations.model.calculator;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
+@Scope("prototype")
 public class AvgCalculator extends AbstractCalculation {
 
     public AvgCalculator(int[] input) {
