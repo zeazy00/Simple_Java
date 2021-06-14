@@ -20,14 +20,14 @@ class MaxCalculatorTest {
     BeanFactory beanFactory;
 
     @Test
-    public void findMaxTest(){
+    public void findMaxTest() {
 
-        int[] data = {14,3648,9987,411,366,7489,46};
+        int[] data = {14, 3648, 9987, 411, 366, 7489, 46};
 
         int expected = Arrays.stream(data).max().getAsInt();
 
-        MaxCalculator calculator = beanFactory.getBean(MaxCalculator.class, data);
-
+        MaxCalculator calculator = beanFactory.getBean(MaxCalculator.class);
+        calculator.setSource(data);
         int res = calculator.execute();
 
         assertEquals(res, expected);

@@ -14,28 +14,28 @@ import java.io.InputStreamReader;
 @Controller
 public class CalculationController {
 
-    BeanFactory beanFactory;
+    private AbstractCalculation calculation;
 
     @Autowired
-    public CalculationController(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
+    public CalculationController(AbstractCalculation calculation) {
+        this.calculation = calculation;
     }
 
     public void start() {
         String input = input();
         int[] data = ToArrayParser.parseFromString(input);
 
-        AbstractCalculation calculation = getCalculation(data);
-        output(calculation);
+        int res = execute(data);
+
+        output(res, calculation);
     }
 
-    public AbstractCalculation getCalculation(int[] data){
-        AbstractCalculation calculation = beanFactory.getBean(AbstractCalculation.class, data);
-        return calculation;
+    public int execute(int[] data) {
+        calculation.setSource(data);
+        return calculation.execute();
     }
 
-    private void output(AbstractCalculation calculation) {
-        int result = calculation.execute();
+    private void output(int result, AbstractCalculation calculation) {
         System.out.printf("Result of %s operation with %s is %d\n",
                           calculation.getOperationName(),
                           calculation.getSource(),

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Scope("prototype")
 public class MaxCalculator extends  AbstractCalculation{
 
-    public MaxCalculator(int[] input){
-        super(input, "Max");
+    public MaxCalculator(){
+        super("Max");
     }
 
     @Override

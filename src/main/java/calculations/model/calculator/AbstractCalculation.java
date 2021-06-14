@@ -1,5 +1,6 @@
 package calculations.model.calculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,18 +11,22 @@ public abstract class AbstractCalculation implements Calculation {
     private String source;
     private String operationName;
 
-    public AbstractCalculation(int[] input, String operationName) {
+    public AbstractCalculation(String operationName) {
+        this.operationName = operationName;
+        numbers = new ArrayList<>();
+    }
+
+    public void setSource(int[] input){
         if (input == null)
             throw new NullPointerException();
 
-        this.operationName = operationName;
         source = "";
         Arrays.stream(input)
-                .forEach(x -> source = source + String.valueOf(x));  //получение
+              .forEach(x -> source = source + String.valueOf(x));  //получение
 
         this.numbers = Arrays.stream(input)
-                .boxed()
-                .collect(Collectors.toList());
+                             .boxed()
+                             .collect(Collectors.toList());
     }
 
     public String getOperationName() {

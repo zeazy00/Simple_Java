@@ -1,5 +1,6 @@
 package testing.Spring;
 
+import calculations.model.calculator.AbstractCalculation;
 import calculations.model.calculator.Calculation;
 import calculations.model.calculator.SumCalculator;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +20,7 @@ public class SumTest {
     BeanFactory beanFactory;
 
     @Autowired
-    public SumTest(BeanFactory beanFactory){
+    public SumTest(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 
@@ -29,8 +30,8 @@ public class SumTest {
         int[] data = {1, 2, 8, 9, 4, 2};
         int expected = Arrays.stream(data).sum();
 
-        Calculation calc = beanFactory.getBean(SumCalculator.class, data);
-
+        AbstractCalculation calc = beanFactory.getBean(SumCalculator.class);
+        calc.setSource(data);
         int res = calc.execute();
 
         Assertions.assertEquals(res, expected);

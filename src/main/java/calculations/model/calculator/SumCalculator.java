@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Primary
-@Scope("prototype")
+//@Scope("prototype")
 public class SumCalculator extends  AbstractCalculation{
 
-    public SumCalculator(int[] input) {
-        super(input, "Sum");
+    public SumCalculator() {
+        super("Sum");
     }
 
     @Override

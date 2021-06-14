@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("prototype")
 public class MinCalculator extends  AbstractCalculation{
-    public MinCalculator(int[] input) {
-        super(input, "Min");
+    public MinCalculator() {
+        super("Min");
     }
 
     @Override

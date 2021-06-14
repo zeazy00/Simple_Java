@@ -24,9 +24,7 @@ public class ControllerTest {
 
         int[] data = {1, 14, 23, 44, 78, 96, 452};
 
-        AbstractCalculation sumCalc = ctrl.getCalculation(data);
-
-        int res = sumCalc.execute();
+        int res = ctrl.execute(data);
 
         Assertions.assertEquals(res, Arrays.stream(data).sum());
     }

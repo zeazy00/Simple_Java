@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Scope("prototype")
 public class AvgCalculator extends AbstractCalculation {
 
-    public AvgCalculator(int[] input) {
-        super(input, "Avg");
+    public AvgCalculator() {
+        super("Avg");
     }
 
     @Override
