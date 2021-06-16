@@ -3,6 +3,8 @@ package calculations.controller;
 import calculations.model.utils.DataValidation;
 import calculations.model.utils.ToArrayParser;
 import calculations.model.calculator.Calculation;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -12,14 +14,11 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
+@ToString
 public class CalculationController {
 
     private List<Calculation> calculations;
-
-    @Autowired
-    public CalculationController(List<Calculation> calculations) {
-        this.calculations = calculations;
-    }
 
     public void start() {
         String input = input();
