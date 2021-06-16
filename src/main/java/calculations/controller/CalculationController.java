@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 @AllArgsConstructor
@@ -33,6 +34,18 @@ public class CalculationController {
     public int execute(Calculation calculation, int[] data) {
         calculation.setSource(data);
         return calculation.execute();
+    }
+
+    public int execute(String name, int[] data) {
+        try {
+            Calculation calculation = calculations.stream()
+                                                  .filter(x -> x.getOperationName().equals(name))
+                                                  .findFirst().get();
+
+            return execute(calculation, data);
+        } catch (NoSuchElementException ex) {
+            throw ex;
+        }
     }
 
     private void output(int result, Calculation calculation) {

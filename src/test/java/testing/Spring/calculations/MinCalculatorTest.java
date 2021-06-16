@@ -1,36 +1,35 @@
-package testing.Spring;
+package testing.Spring.calculations;
 
+import calculations.Program;
 import calculations.model.calculator.AbstractCalculation;
 import calculations.model.calculator.Calculation;
+import calculations.model.calculator.MinCalculator;
 import calculations.model.calculator.SumCalculator;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import calculations.Program;
 
 import java.util.Arrays;
 
-@SpringBootTest(classes = Program.class)
-@ContextConfiguration(classes = {SumCalculator.class})
-public class SumTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    BeanFactory beanFactory;
+@SpringBootTest(classes = Program.class)
+class MinCalculatorTest {
 
     @Autowired
-    public SumTest(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
+    BeanFactory beanFactory;
 
     @Test
-    public void sumTest() {
-
+    void execute() {
         int[] data = {1, 2, 8, 9, 4, 2};
-        int expected = Arrays.stream(data).sum();
+        int expected = Arrays.stream(data)
+                             .min()
+                             .getAsInt();
 
-        AbstractCalculation calc = beanFactory.getBean(SumCalculator.class);
+        Calculation calc = beanFactory.getBean(MinCalculator.class);
         calc.setSource(data);
         int res = calc.execute();
 

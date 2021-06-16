@@ -1,6 +1,7 @@
-package testing;
+package testing.Spring.utils;
 
 import calculations.model.utils.ToArrayParser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,9 +33,11 @@ class ToArrayParserTest {
 
         String input = "14549a9";
 
-       assertThrows(IllegalArgumentException.class, () -> {
+       Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ToArrayParser.parseFromString(input);
         });
+
+        Assertions.assertNotNull(exception);
     }
 
 }
