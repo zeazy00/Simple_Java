@@ -1,9 +1,8 @@
 package calculations.controller;
 
-import calculations.model.DataValidation;
-import calculations.model.ToArrayParser;
-import calculations.model.calculator.AbstractCalculation;
-import org.springframework.beans.factory.BeanFactory;
+import calculations.model.utils.DataValidation;
+import calculations.model.utils.ToArrayParser;
+import calculations.model.calculator.Calculation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -14,10 +13,10 @@ import java.io.InputStreamReader;
 @Controller
 public class CalculationController {
 
-    private AbstractCalculation calculation;
+    private Calculation calculation;
 
     @Autowired
-    public CalculationController(AbstractCalculation calculation) {
+    public CalculationController(Calculation calculation) {
         this.calculation = calculation;
     }
 
@@ -35,7 +34,7 @@ public class CalculationController {
         return calculation.execute();
     }
 
-    private void output(int result, AbstractCalculation calculation) {
+    private void output(int result, Calculation calculation) {
         System.out.printf("Result of %s operation with %s is %d\n",
                           calculation.getOperationName(),
                           calculation.getSource(),

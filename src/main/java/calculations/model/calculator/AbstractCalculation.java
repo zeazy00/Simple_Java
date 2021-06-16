@@ -16,23 +16,26 @@ public abstract class AbstractCalculation implements Calculation {
         numbers = new ArrayList<>();
     }
 
+    @Override
     public void setSource(int[] input){
         if (input == null)
             throw new NullPointerException();
 
         source = "";
         Arrays.stream(input)
-              .forEach(x -> source = source + String.valueOf(x));  //получение
+              .forEach(x -> source = source + String.valueOf(x));
 
         this.numbers = Arrays.stream(input)
                              .boxed()
                              .collect(Collectors.toList());
     }
 
+    @Override
     public String getOperationName() {
         return operationName;
     }
 
+    @Override
     public String getSource() {
         return source;
     }
