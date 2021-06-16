@@ -1,9 +1,10 @@
 package calculations.model.calculator;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(name = "calculation.max", havingValue = "true")
 public class MaxCalculator extends  AbstractCalculation{
 
     public MaxCalculator(){

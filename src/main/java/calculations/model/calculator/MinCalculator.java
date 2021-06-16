@@ -1,10 +1,12 @@
 package calculations.model.calculator;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(name = "calculation.min", havingValue = "true")
 public class MinCalculator extends  AbstractCalculation{
+
     public MinCalculator() {
         super("Min");
     }

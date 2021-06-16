@@ -9,27 +9,29 @@ import org.springframework.stereotype.Controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 @Controller
 public class CalculationController {
 
-    private Calculation calculation;
+    private List<Calculation> calculations;
 
     @Autowired
-    public CalculationController(Calculation calculation) {
-        this.calculation = calculation;
+    public CalculationController(List<Calculation> calculations) {
+        this.calculations = calculations;
     }
 
     public void start() {
         String input = input();
         int[] data = ToArrayParser.parseFromString(input);
 
-        int res = execute(data);
-
-        output(res, calculation);
+        calculations.forEach(calc -> {
+            int res = execute(calc, data);
+            output(res, calc);
+        });
     }
 
-    public int execute(int[] data) {
+    public int execute(Calculation calculation, int[] data) {
         calculation.setSource(data);
         return calculation.execute();
     }
