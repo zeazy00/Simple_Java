@@ -1,4 +1,4 @@
-package calculations.model;
+package calculations.model.utils;
 
 public class ToArrayParser {
     public static int[] parseFromString(String input) {

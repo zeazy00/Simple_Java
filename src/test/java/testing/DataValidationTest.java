@@ -1,6 +1,6 @@
 package testing;
 
-import calculations.model.DataValidation;
+import calculations.model.utils.DataValidation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

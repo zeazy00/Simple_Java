@@ -1,6 +1,6 @@
 package testing;
 
-import calculations.model.ToArrayParser;
+import calculations.model.utils.ToArrayParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
