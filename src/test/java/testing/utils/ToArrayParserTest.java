@@ -1,4 +1,4 @@
-package testing.Spring.utils;
+package testing.utils;
 
 import calculations.model.utils.ToArrayParser;
 import org.junit.jupiter.api.Assertions;

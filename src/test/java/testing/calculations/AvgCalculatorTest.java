@@ -1,22 +1,13 @@
-package testing.Spring.calculations;
+package testing.calculations;
 
-import calculations.Program;
 import calculations.model.calculator.AvgCalculator;
 import calculations.model.calculator.Calculation;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 
-@SpringBootTest(classes = Program.class)
 class AvgCalculatorTest {
-
-    @Autowired
-    BeanFactory beanFactory;
 
     @Test
     public void execute() {
@@ -26,7 +17,7 @@ class AvgCalculatorTest {
                                   .average()
                                   .getAsDouble();
 
-        Calculation calc = beanFactory.getBean(AvgCalculator.class);
+        Calculation calc = new AvgCalculator();
         calc.setSource(data);
         int res = calc.execute();
 

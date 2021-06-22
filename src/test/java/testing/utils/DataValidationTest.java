@@ -1,4 +1,4 @@
-package testing.Spring.utils;
+package testing.utils;
 
 import calculations.model.utils.DataValidation;
 import org.junit.jupiter.api.Test;
