@@ -3,8 +3,11 @@ package calculations.controller;
 import calculations.model.utils.DataValidation;
 import calculations.model.utils.ToArrayParser;
 import calculations.model.calculator.Calculation;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -15,7 +18,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @ToString
 public class CalculationController {
 

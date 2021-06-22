@@ -50,7 +50,7 @@ public class ControllerTest {
         }
         else{
 
-            Exception exception = assertThrows(NullPointerException.class, () -> {
+            Exception exception = assertThrows(NoSuchElementException.class, () -> {
                 ctrl.execute(name, data);
             });
 
@@ -72,7 +72,7 @@ public class ControllerTest {
         }
         else{
 
-            Exception exception = assertThrows(NullPointerException.class, () -> {
+            Exception exception = assertThrows(NoSuchElementException.class, () -> {
                 ctrl.execute(name, data);
             });
 
@@ -114,7 +114,7 @@ public class ControllerTest {
         }
         else{
 
-            Exception exception = assertThrows(NullPointerException.class, () -> {
+            Exception exception = assertThrows(NoSuchElementException.class, () -> {
                 ctrl.execute(name, data);
             });
 
