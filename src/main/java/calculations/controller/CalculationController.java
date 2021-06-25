@@ -2,47 +2,31 @@ package calculations.controller;
 
 import calculations.model.calculator.Calculation;
 import calculations.model.utils.DataValidation;
-import calculations.model.utils.ToArrayParser;
+import calculations.model.utils.ListUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class CalculationController {
 
     private final List<Calculation> calculations;
 
     public void start() {
         String input = input();
-        int[] data = ToArrayParser.parseFromString(input);
+        List<Integer> data = ListUtil.parseDigitsFromString(input);
 
         calculations.forEach(calc -> {
-            int res = execute(calc, data);
-            output(res, calc);
+//            int res = calc.execute(data);
+//            output(res, calc);
         });
-    }
-
-    public int execute(Calculation calculation, int[] data) {
-        calculation.setSource(data);
-        return calculation.execute();
-    }
-
-    public int execute(String name, int[] data) {
-        try {
-            Calculation calculation = calculations.stream()
-                                                  .filter(x -> x.getOperationName().equals(name))
-                                                  .findFirst().get();
-
-            return execute(calculation, data);
-        } catch (NoSuchElementException ex) {
-            throw ex;
-        }
     }
 
     private void output(int result, Calculation calculation) {
@@ -54,18 +38,19 @@ public class CalculationController {
 
     public String input() {
         System.out.println("Enter number:");
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(System.in));
 
         String input = "";
         try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(System.in));
+
             input = reader.readLine();
             while (!DataValidation.validate(input)) {
                 System.out.println("Invalid input\nTry again!");
                 input = reader.readLine();
             }
         } catch (IOException exception) {
-            System.out.println("Input error:\n" + exception.getMessage());
+            log.error("Input error:\n" + exception.getMessage());
         }
 
         return input;
