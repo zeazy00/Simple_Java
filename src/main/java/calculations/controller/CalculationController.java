@@ -1,14 +1,9 @@
 package calculations.controller;
 
+import calculations.model.calculator.Calculation;
 import calculations.model.utils.DataValidation;
 import calculations.model.utils.ToArrayParser;
-import calculations.model.calculator.Calculation;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
@@ -19,11 +14,9 @@ import java.util.NoSuchElementException;
 
 @Controller
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@ToString
 public class CalculationController {
 
-    private List<Calculation> calculations;
+    private final List<Calculation> calculations;
 
     public void start() {
         String input = input();
@@ -67,7 +60,7 @@ public class CalculationController {
         String input = "";
         try {
             input = reader.readLine();
-            while (DataValidation.validate(input) == false) {
+            while (!DataValidation.validate(input)) {
                 System.out.println("Invalid input\nTry again!");
                 input = reader.readLine();
             }

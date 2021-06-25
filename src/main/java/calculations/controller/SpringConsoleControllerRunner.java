@@ -1,16 +1,16 @@
 package calculations.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(value = "test", havingValue = "false")
-public class Runner implements CommandLineRunner {
+@RequiredArgsConstructor
+public class SpringConsoleControllerRunner implements CommandLineRunner {
 
-    @Autowired
-    CalculationController ctrl;
+    private final CalculationController ctrl;
 
     @Override
     public void run(String... args) throws Exception {
