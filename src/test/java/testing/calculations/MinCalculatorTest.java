@@ -6,20 +6,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 class MinCalculatorTest {
 
     @Test
     void execute() {
-        int[] data = {1, 2, 8, 9, 4, 2};
-        int expected = Arrays.stream(data)
-                             .min()
-                             .getAsInt();
+        //arrange
+        List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
+                                   .boxed()
+                                   .collect(Collectors.toList());
 
         Calculation calc = new MinCalculator();
-        calc.setSource(data);
-        int res = calc.execute();
 
+        int expected = data.stream()
+                           .mapToInt(x -> x)
+                           .min()
+                           .getAsInt();
+
+        //act
+        int res = calc.execute(data);
+
+        //assert
         Assertions.assertEquals(res, expected);
     }
 }

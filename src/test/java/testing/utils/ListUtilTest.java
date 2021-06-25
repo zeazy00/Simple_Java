@@ -13,6 +13,7 @@ class ListUtilTest {
     @Test
     public void emptyInputParse() {
 
+        //arrange
         String input = "";
 
         //Act
@@ -25,6 +26,7 @@ class ListUtilTest {
     @Test
     public void validInputParse() {
 
+        //arrange
         String input = "145499";
 
         //Act
@@ -37,12 +39,15 @@ class ListUtilTest {
     @Test
     public void invalidInputParse() {
 
+        //arrange
         String input = "14549a9";
 
+        //act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ListUtil.parseDigitsFromString(input);
         });
 
+        //assert
         Assertions.assertNotNull(exception);
     }
 

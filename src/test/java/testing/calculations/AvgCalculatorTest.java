@@ -6,21 +6,30 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 class AvgCalculatorTest {
 
     @Test
     public void execute() {
 
-        int[] data = {1, 2, 8, 9, 4, 2};
-        int expected = (int)Arrays.stream(data)
-                                  .average()
-                                  .getAsDouble();
+        //arrange
+        List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
+                                   .boxed()
+                                   .collect(Collectors.toList());
 
         Calculation calc = new AvgCalculator();
-        calc.setSource(data);
-        int res = calc.execute();
 
+        int expected = (int) data.stream()
+                                 .mapToInt(x -> x)
+                                 .average()
+                                 .getAsDouble();
+
+        //act
+        int res = calc.execute(data);
+
+        //assert
         Assertions.assertEquals(res, expected);
     }
 
