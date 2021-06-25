@@ -1,8 +1,8 @@
 package calculations.model.calculator;
 
+import java.util.List;
+
 public interface Calculation {
-    int execute();
-    void setSource(int[] data);
+    int execute(List<Integer> data);
     String getOperationName();
-    String getSource();
 }

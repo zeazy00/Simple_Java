@@ -1,74 +1,66 @@
 package calculations.controller;
 
-import calculations.model.utils.DataValidation;
-import calculations.model.utils.ToArrayParser;
 import calculations.model.calculator.Calculation;
-import lombok.AllArgsConstructor;
-import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
+import calculations.model.outputprovider.OutputProvider;
+import calculations.model.utils.DataValidation;
+import calculations.model.utils.ListUtil;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Controller
-@AllArgsConstructor
-@ToString
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class CalculationController {
 
-    private List<Calculation> calculations;
+    List<Calculation> calculations;
+    OutputProvider outputProvider;
 
     public void start() {
         String input = input();
-        int[] data = ToArrayParser.parseFromString(input);
+        List<Integer> data = ListUtil.parseDigitsFromString(input);
 
+        String displayInputMessage = String.format("A number of operations were performed at %s:\n",
+                                                   input);
+
+        outputProvider.output(displayInputMessage);
         calculations.forEach(calc -> {
-            int res = execute(calc, data);
-            output(res, calc);
+            int res = calc.execute(data);
+            outputResult(res, calc);
         });
     }
 
-    public int execute(Calculation calculation, int[] data) {
-        calculation.setSource(data);
-        return calculation.execute();
-    }
+    private void outputResult(int result, Calculation calculation) {
+        String message = String.format("Result of %s operation is %d\n",
+                                       calculation.getOperationName(),
+                                       result);
 
-    public int execute(String name, int[] data) {
-        try {
-            Calculation calculation = calculations.stream()
-                                                  .filter(x -> x.getOperationName().equals(name))
-                                                  .findFirst().get();
-
-            return execute(calculation, data);
-        } catch (NoSuchElementException ex) {
-            throw ex;
-        }
-    }
-
-    private void output(int result, Calculation calculation) {
-        System.out.printf("Result of %s operation with %s is %d\n",
-                          calculation.getOperationName(),
-                          calculation.getSource(),
-                          result);
+        outputProvider.output(message);
     }
 
     public String input() {
-        System.out.println("Enter number:");
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(System.in));
+        outputProvider.output("Enter number:\n");
 
         String input = "";
         try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(System.in));
+
             input = reader.readLine();
-            while (DataValidation.validate(input) == false) {
-                System.out.println("Invalid input\nTry again!");
+            while (!DataValidation.validateInput(input)) {
+                outputProvider.output("Invalid input\nTry again!\n");
                 input = reader.readLine();
             }
         } catch (IOException exception) {
-            System.out.println("Input error:\n" + exception.getMessage());
+            log.error("Input error:\n" + exception.getMessage());
         }
 
         return input;
