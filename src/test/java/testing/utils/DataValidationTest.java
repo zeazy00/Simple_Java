@@ -14,7 +14,7 @@ class DataValidationTest {
         String input = "12dsd2";
 
         //act
-        boolean res = DataValidation.validate(input);
+        boolean res = DataValidation.validateInput(input);
 
         //assert
         assertFalse(res);
@@ -27,7 +27,7 @@ class DataValidationTest {
         String input = "";
 
         //act
-        boolean res = DataValidation.validate(input);
+        boolean res = DataValidation.validateInput(input);
 
         //assert
         assertFalse(res);
@@ -40,7 +40,7 @@ class DataValidationTest {
         String input = "24548";
 
         //act
-        boolean res = DataValidation.validate(input);
+        boolean res = DataValidation.validateInput(input);
 
         //assert
         assertTrue(res);
@@ -53,7 +53,7 @@ class DataValidationTest {
         String input = null;
 
         //act
-        boolean res = DataValidation.validate(input);
+        boolean res = DataValidation.validateInput(input);
 
         //assert
         assertFalse(res);

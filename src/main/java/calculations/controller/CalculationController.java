@@ -55,7 +55,7 @@ public class CalculationController {
                     new InputStreamReader(System.in));
 
             input = reader.readLine();
-            while (!DataValidation.validate(input)) {
+            while (!DataValidation.validateInput(input)) {
                 outputProvider.output("Invalid input\nTry again!\n");
                 input = reader.readLine();
             }
