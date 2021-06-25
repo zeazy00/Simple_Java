@@ -1,12 +1,13 @@
-package calculations.controller;
+package calculations.runner;
 
+import calculations.controller.CalculationController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnProperty(value = "test", havingValue = "false")
+@Profile("!test")
 @RequiredArgsConstructor
 public class SpringConsoleControllerRunner implements CommandLineRunner {
 
