@@ -50,9 +50,8 @@ public class CalculationController {
         outputProvider.output("Enter number:\n");
 
         String input = "";
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(System.in));
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(System.in))) {
 
             input = reader.readLine();
             while (!DataValidation.validateInput(input)) {
