@@ -23,16 +23,17 @@ public class CalculationController {
         String input = input();
         List<Integer> data = ListUtil.parseDigitsFromString(input);
 
+        System.out.printf("A number of operations were performed at %s:\n",
+                          input);
         calculations.forEach(calc -> {
-//            int res = calc.execute(data);
-//            output(res, calc);
+            int res = calc.execute(data);
+            output(res, calc);
         });
     }
 
     private void output(int result, Calculation calculation) {
-        System.out.printf("Result of %s operation with %s is %d\n",
+        System.out.printf("Result of %s operation is %d\n",
                           calculation.getOperationName(),
-                          calculation.getSource(),
                           result);
     }
 
