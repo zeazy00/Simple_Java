@@ -1,4 +1,4 @@
-package testing.utils;
+package calculations.utils;
 
 import calculations.model.utils.ListUtil;
 import org.junit.jupiter.api.Assertions;

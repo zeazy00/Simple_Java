@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
-public class CalculationController {
+public class CalculationConsoleController {
 
     List<Calculation> calculations;
     OutputProvider outputProvider;
@@ -46,7 +46,7 @@ public class CalculationController {
         outputProvider.output(message);
     }
 
-    public String input() {
+    private String input() {
         outputProvider.output("Enter number:\n");
 
         String input = "";

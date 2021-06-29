@@ -1,4 +1,4 @@
-package testing.utils;
+package calculations.utils;
 
 import calculations.model.utils.DataValidation;
 import org.junit.jupiter.api.Test;

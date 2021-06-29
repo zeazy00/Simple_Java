@@ -1,4 +1,4 @@
-package testing.calculations;
+package calculations.calculations;
 
 import calculations.model.calculator.AvgCalculator;
 import calculations.model.calculator.Calculation;

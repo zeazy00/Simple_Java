@@ -1,4 +1,4 @@
-package testing.calculations;
+package calculations.calculations;
 
 import calculations.model.calculator.Calculation;
 import calculations.model.calculator.MinCalculator;
