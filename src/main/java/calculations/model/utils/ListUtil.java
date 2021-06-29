@@ -17,4 +17,8 @@ public class ListUtil {
 
         return res;
     }
+
+    public static List<Integer> parseDigitsFromInteger(Integer input){
+        return parseDigitsFromString(String.valueOf(input));
+    }
 }
