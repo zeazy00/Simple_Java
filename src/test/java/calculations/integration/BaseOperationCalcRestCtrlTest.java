@@ -53,7 +53,7 @@ public class BaseOperationCalcRestCtrlTest {
                                                         .andReturn()
                                                         .getResponse();
 
-        Assertions.assertEquals("Input number must be positive!",
+        Assertions.assertEquals("Input string must contain digits only",
                                 response.getContentAsString());
     }
 
@@ -93,7 +93,11 @@ public class BaseOperationCalcRestCtrlTest {
                                                                             .content(data.toString()));
 
         //Assert
-        resultActions.andExpect(MockMvcResultMatchers.status()
-                                                     .isBadRequest());
+        MockHttpServletResponse response = resultActions.andExpect(MockMvcResultMatchers.status()
+                                                                                        .isBadRequest())
+                                                        .andReturn().getResponse();
+
+        Assertions.assertEquals("Validation exception: Input number can't be bigger than 100 signs",
+                                response.getContentAsString());
     }
 }

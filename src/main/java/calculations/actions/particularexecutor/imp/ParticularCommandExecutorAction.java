@@ -3,6 +3,7 @@ package calculations.actions.particularexecutor.imp;
 import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
 import calculations.model.calculator.Calculation;
+import calculations.model.utils.DataValidation;
 import calculations.model.utils.ListUtil;
 import calculations.model.validation.exceptions.MathOperationNotSupportedException;
 import calculations.model.validation.postprocess.OutputNumberValidator;
@@ -24,7 +25,10 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
     List<InputNumberValidator> preProcessValidation;
 
     @Override
-    public OperationResultDTO execute(String opName, int input) {
+    public OperationResultDTO execute(String opName, String input) {
+
+        if(!DataValidation.validateInput(input))
+            throw new IllegalArgumentException("Input string must contain digits only");
 
         Calculation calculation = calculationList.stream()
                                                  .filter(x -> x.getOperationName()
@@ -34,10 +38,9 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
                                                          () -> new MathOperationNotSupportedException(
                                                                  String.format("Operation %s is not supported",
                                                                                opName)));
-        String inputStr = String.valueOf(input);
-        preProcessValidation.forEach(x -> x.validate(inputStr));
+        preProcessValidation.forEach(x -> x.validate(input));
 
-        List<Integer> data = ListUtil.parseDigitsFromInteger(input);
+        List<Integer> data = ListUtil.parseDigitsFromString(input);
         int result = calculation.execute(data);
 
         postProcessValidations.forEach(x -> x.validate(result));

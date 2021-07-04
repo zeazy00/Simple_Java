@@ -10,7 +10,7 @@ import java.util.List;
 public class AllCommandExecutorAction implements AllCommandExecutor {
 
     @Override
-    public List<OperationResultDTO> executeAll(int input) {
+    public List<OperationResultDTO> executeAll(String input) {
         return null;
     }
 }

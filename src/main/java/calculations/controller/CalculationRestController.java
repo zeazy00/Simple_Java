@@ -21,12 +21,12 @@ public class CalculationRestController {
     private final AllCommandExecutor allCommandExecutor;
 
     @PostMapping("/math/calculate")
-    public List<OperationResultDTO> calculateAllByParam(@RequestParam int input) {
+    public List<OperationResultDTO> calculateAllByParam(@RequestParam String input) {
         return allCommandExecutor.executeAll(input);
     }
 
     @PostMapping("/math/calculate/sum")
-    public OperationResultDTO calculateSum(@RequestBody int input) {
+    public OperationResultDTO calculateSum(@RequestBody String input) {
         String opName = "Sum";
 
         return particularCommandExecutor.execute(opName, input);
