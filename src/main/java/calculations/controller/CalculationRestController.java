@@ -1,53 +1,52 @@
 package calculations.controller;
 
+import calculations.controller.dto.OperationResultDTO;
 import calculations.model.calculator.Calculation;
 import calculations.model.utils.ListUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.naming.OperationNotSupportedException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @ConditionalOnProperty(value = "console", havingValue = "false")
 @RequiredArgsConstructor
 public class CalculationRestController {
+
     private final List<Calculation> calculationList;
 
     @PostMapping("/math/calculate")
-    String calculateAllByParam(@PathVariable int input) {
+    public List<OperationResultDTO> calculateAllByParam(@PathVariable int input) {
         List<Integer> values = ListUtil.parseDigitsFromInteger(input);
-        StringBuilder response = new StringBuilder();
 
+        List<OperationResultDTO> result = new ArrayList<>();
         calculationList.forEach(calc -> {
             int res = calc.execute(values);
-            response.append(
-                    getOutputString(res,
-                                    calc.getOperationName())
-                           );
+
+            result.add(
+                    new OperationResultDTO(calc.getOperationName(),
+                                           res));
         });
 
-        return response.toString();
+        return result;
     }
 
-    private String getOutputString(int res, String opName) {
-        return String.format("%s:%d,\n", opName, res);
-    }
-
-    @SneakyThrows
     @PostMapping("/math/calculate/sum")
-    String calculateSum(@RequestBody int input) {
+    public OperationResultDTO calculateSum(@RequestBody int input) {
         String opName = "Sum";
-        Calculation calculation = calculationList.stream()
-                                                 .filter(x -> x.getOperationName().equals(opName))
-                                                 .findFirst()
-                                                 .orElseThrow(() -> new OperationNotSupportedException(opName));
+        Calculation calc = calculationList.stream()
+                                          .filter(x -> x.getOperationName().equals(opName))
+                                          .findFirst().get();
 
         List<Integer> values = ListUtil.parseDigitsFromInteger(input);
-        int res = calculation.execute(values);
+        int res = calc.execute(values);
 
-        return getOutputString(res, opName);
+        return new OperationResultDTO(calc.getOperationName(),
+                                      res);
     }
 }

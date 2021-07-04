@@ -1,44 +1,47 @@
 package calculations.integration;
 
-import calculations.SimplJavaProgram;
+import calculations.controller.dto.OperationResultDTO;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@AutoConfigureWebTestClient
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@AllArgsConstructor
+@SpringBootTest
+@AutoConfigureMockMvc
 public class CalculationRestControllerTest {
 
-//    @Autowired
-//    private WebTestClient webTestClient;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    void sumTest() {
-        WebTestClient webTestClient = WebTestClient.bindToServer()
-                                                   .baseUrl("http://localhost:8080")
-                                                   .build();
+    void sumTest() throws Exception {
+
+        //Arrange
+        String bodyJson = "{input:1454668}";
+        Gson gson = new Gson();
 
         //act
-        String responce = webTestClient.post()
-                                       .uri("/math/calculate/sum")
-                                       .contentType(MediaType.APPLICATION_FORM_URLENCODED).bodyValue("input = 12544")
-                                       .accept(MediaType.APPLICATION_JSON)
-                                       .exchange()
-                                       //assert
-                                       .expectStatus()
-                                       .isOk()
-                                       .expectBody(String.class)
-                                       .returnResult().getResponseBody();
-
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/math/calculate/sum")
+                                                                            .contentType(MediaType.APPLICATION_JSON)
+                                                                            .content(bodyJson));
         //assert
-        Assertions.assertTrue(responce.contains("Sum"));
-        Assertions.assertTrue(responce.contains("16"));
+        MvcResult result = resultActions.andExpect(
+                MockMvcResultMatchers.status()
+                                     .isCreated()).andReturn();
+
+        String jsonString = result.getResponse().getContentAsString();
+        OperationResultDTO resultDTO = gson.fromJson(jsonString, OperationResultDTO.class);
+
+        Assertions.assertEquals(resultDTO.getOperationName(),"Sum");
+        Assertions.assertEquals(resultDTO.getResult(),34);
     }
 
 }
