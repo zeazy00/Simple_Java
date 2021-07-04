@@ -1,6 +1,5 @@
 package calculations.model.validation.preprocess;
 
-import calculations.model.validation.Validator;
-
-public interface InputNumberValidator extends Validator<String> {
+public interface InputNumberValidator{
+    void validate(String input);
 }
