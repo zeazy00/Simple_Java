@@ -10,9 +10,11 @@ import calculations.model.validation.preprocess.InputNumberValidator;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ParticularCommandExecutorAction implements ParticularCommandExecutor {
@@ -22,7 +24,7 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
     List<InputNumberValidator> preProcessValidation;
 
     @Override
-    public OperationResultDTO execute(String opName, int input) throws MathOperationNotSupportedException {
+    public OperationResultDTO execute(String opName, int input) {
 
         Calculation calculation = calculationList.stream()
                                                  .filter(x -> x.getOperationName()
@@ -34,8 +36,10 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
                                                                                opName)));
         String inputStr = String.valueOf(input);
         preProcessValidation.forEach(x -> x.validate(inputStr));
+
         List<Integer> data = ListUtil.parseDigitsFromInteger(input);
         int result = calculation.execute(data);
+
         postProcessValidations.forEach(x -> x.validate(result));
 
         return new OperationResultDTO(opName, result);

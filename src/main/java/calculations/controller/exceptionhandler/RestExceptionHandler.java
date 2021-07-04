@@ -38,6 +38,14 @@ public class RestExceptionHandler {
     }
 
     @ResponseBody
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String invalidInputException(IllegalArgumentException ex){
+        log.error(ex.getMessage());
+        return ex.getMessage();
+    }
+
+    @ResponseBody
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String exceptionHandler(Exception ex) {

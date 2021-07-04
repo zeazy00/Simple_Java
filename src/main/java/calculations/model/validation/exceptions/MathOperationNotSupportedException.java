@@ -1,6 +1,6 @@
 package calculations.model.validation.exceptions;
 
-public class MathOperationNotSupportedException extends Exception {
+public class MathOperationNotSupportedException extends RuntimeException {
     public MathOperationNotSupportedException() {
         super();
     }
