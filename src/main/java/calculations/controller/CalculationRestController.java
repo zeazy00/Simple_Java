@@ -5,10 +5,7 @@ import calculations.model.calculator.Calculation;
 import calculations.model.utils.ListUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,7 @@ public class CalculationRestController {
     private final List<Calculation> calculationList;
 
     @PostMapping("/math/calculate")
-    public List<OperationResultDTO> calculateAllByParam(@PathVariable int input) {
+    public List<OperationResultDTO> calculateAllByParam(@RequestParam int input) {
         List<Integer> values = ListUtil.parseDigitsFromInteger(input);
 
         List<OperationResultDTO> result = new ArrayList<>();

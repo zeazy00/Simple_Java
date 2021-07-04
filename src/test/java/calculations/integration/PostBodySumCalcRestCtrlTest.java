@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CalculationRestControllerTest {
+public class PostBodySumCalcRestCtrlTest {
 
     @Autowired
     private MockMvc mockMvc;
