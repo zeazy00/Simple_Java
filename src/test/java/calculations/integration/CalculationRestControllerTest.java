@@ -25,7 +25,7 @@ public class CalculationRestControllerTest {
     void sumTest() throws Exception {
 
         //Arrange
-        String bodyJson = "{input:1454668}";
+        String bodyJson = "1454668";
         Gson gson = new Gson();
 
         //act
@@ -35,7 +35,7 @@ public class CalculationRestControllerTest {
         //assert
         MvcResult result = resultActions.andExpect(
                 MockMvcResultMatchers.status()
-                                     .isCreated()).andReturn();
+                                     .isOk()).andReturn();
 
         String jsonString = result.getResponse().getContentAsString();
         OperationResultDTO resultDTO = gson.fromJson(jsonString, OperationResultDTO.class);
