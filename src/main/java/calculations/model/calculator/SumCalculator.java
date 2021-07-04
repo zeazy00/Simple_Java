@@ -12,7 +12,7 @@ import java.util.List;
 public class SumCalculator extends AbstractCalculation {
 
     public SumCalculator() {
-        super("Sum");
+        super(CalculationAvailableOperations.SumCalc);
     }
 
     @Override

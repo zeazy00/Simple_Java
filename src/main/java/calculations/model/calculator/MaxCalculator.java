@@ -7,16 +7,16 @@ import java.util.List;
 
 @Service
 @ConditionalOnProperty(name = "calculation.max", havingValue = "true")
-public class MaxCalculator extends  AbstractCalculation{
+public class MaxCalculator extends AbstractCalculation {
 
-    public MaxCalculator(){
-        super("Max");
+    public MaxCalculator() {
+        super(CalculationAvailableOperations.MaxCalc);
     }
 
     @Override
     public int execute(List<Integer> data) {
         return data.stream()
-                .max(Integer::compare)
-                .get();
+                   .max(Integer::compare)
+                   .get();
     }
 }

@@ -38,6 +38,26 @@ public class BaseOperationCalcRestCtrlTest {
     }
 
     @Test
+    void invalidInputTest() throws Exception {
+        //Arrange
+        String bodyJson = "45ds9e";
+
+        //act
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                            .contentType(MediaType.APPLICATION_JSON)
+                                                                            .content(bodyJson));
+
+        //assert
+        MockHttpServletResponse response = resultActions.andExpect(MockMvcResultMatchers.status()
+                                                                                        .isBadRequest())
+                                                        .andReturn()
+                                                        .getResponse();
+
+        Assertions.assertEquals("Input string must contain digits only",
+                                response.getContentAsString());
+    }
+
+    @Test
     void negativeNumberInputTest() throws Exception {
         //Arrange
         String bodyJson = "-4449";

@@ -3,6 +3,7 @@ package calculations.controller;
 import calculations.actions.allexecutor.AllCommandExecutor;
 import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
+import calculations.model.calculator.CalculationAvailableOperations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +28,28 @@ public class CalculationRestController {
 
     @PostMapping("/math/calculate/sum")
     public OperationResultDTO calculateSum(@RequestBody String input) {
-        String opName = "Sum";
-
-        return particularCommandExecutor.execute(opName, input);
+        return particularCommandExecutor.execute(CalculationAvailableOperations.SumCalc,
+                                                 input);
     }
+
+//    @PostMapping("/math/calculate/sum")
+//    public OperationResultDTO calculateAvg(@RequestBody String input) {
+//        String opName = "Sum";
+//
+//        return particularCommandExecutor.execute(opName, input);
+//    }
+//
+//    @PostMapping("/math/calculate/sum")
+//    public OperationResultDTO calculateMax(@RequestBody String input) {
+//        String opName = "Sum";
+//
+//        return particularCommandExecutor.execute(opName, input);
+//    }
+//
+//    @PostMapping("/math/calculate/sum")
+//    public OperationResultDTO calculateMin(@RequestBody String input) {
+//        String opName = "Sum";
+//
+//        return particularCommandExecutor.execute(opName, input);
+//    }
 }

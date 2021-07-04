@@ -10,7 +10,7 @@ import java.util.List;
 public class MinCalculator extends AbstractCalculation {
 
     public MinCalculator() {
-        super("Min");
+        super(CalculationAvailableOperations.MinCalc);
     }
 
     @Override
