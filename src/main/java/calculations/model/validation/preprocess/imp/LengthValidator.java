@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LengthValidator implements InputNumberValidator {
 
-    private static final int MAX_LENGTH = 100;
+    public static final int MAX_LENGTH = 100;
 
     @Override
     public void validate(String input) {
