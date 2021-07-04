@@ -1,11 +1,11 @@
 package calculations.model.calculator;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 @ConditionalOnProperty(name = "calculation.min", havingValue = "true")
 public class MinCalculator extends AbstractCalculation {
 

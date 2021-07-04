@@ -2,11 +2,11 @@ package calculations.model.calculator;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 @Primary
 @ConditionalOnProperty(name = "calculation.sum", havingValue = "true")
 public class SumCalculator extends AbstractCalculation {
