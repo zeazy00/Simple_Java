@@ -5,7 +5,7 @@ import calculations.model.validation.postprocess.OutputNumberValidator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BadLuckAvgValidator implements OutputNumberValidator {
+public class BadLuckValidator implements OutputNumberValidator {
 
     private static final int BAD_VALUE = 3;
 

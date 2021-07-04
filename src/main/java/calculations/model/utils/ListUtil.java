@@ -18,7 +18,10 @@ public class ListUtil {
         return res;
     }
 
-    public static List<Integer> parseDigitsFromInteger(Integer input){
+    public static List<Integer> parseDigitsFromInteger(Integer input) {
+        if (input < 0)
+            throw new IllegalArgumentException("Input number must be positive!");
+
         return parseDigitsFromString(String.valueOf(input));
     }
 }

@@ -4,11 +4,9 @@ import calculations.controller.dto.OperationResultDTO;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -18,6 +16,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
 
+    private String url = "/math/calculate/sum";
+
     @Test
     void sumValidTest() throws Exception {
 
@@ -26,7 +26,7 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
         Gson gson = new Gson();
 
         //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/math/calculate/sum")
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
                                                                             .contentType(MediaType.APPLICATION_JSON)
                                                                             .content(bodyJson));
         //assert
@@ -39,5 +39,35 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
 
         Assertions.assertEquals(resultDTO.getOperationName(),"Sum");
         Assertions.assertEquals(resultDTO.getResult(),34);
+    }
+
+    @Test
+    void meaningOfLifeInputTest() throws Exception {
+        //Arrange
+        String data = "777777";
+
+        //act
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                            .contentType(MediaType.APPLICATION_JSON)
+                                                                            .content(data));
+
+        //assert
+        resultActions.andExpect(MockMvcResultMatchers.status()
+                                                     .isNonAuthoritativeInformation());
+    }
+
+    @Test
+    void badNumberInputTest() throws Exception {
+        //arrange
+        String data = "3";
+
+        //act
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                            .contentType(MediaType.APPLICATION_JSON)
+                                                                            .content(data));
+
+        //assert
+        resultActions.andExpect(MockMvcResultMatchers.status()
+                                                     .isNonAuthoritativeInformation());
     }
 }
