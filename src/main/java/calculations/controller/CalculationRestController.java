@@ -32,24 +32,21 @@ public class CalculationRestController {
                                                  input);
     }
 
-//    @PostMapping("/math/calculate/sum")
-//    public OperationResultDTO calculateAvg(@RequestBody String input) {
-//        String opName = "Sum";
-//
-//        return particularCommandExecutor.execute(opName, input);
-//    }
-//
-//    @PostMapping("/math/calculate/sum")
-//    public OperationResultDTO calculateMax(@RequestBody String input) {
-//        String opName = "Sum";
-//
-//        return particularCommandExecutor.execute(opName, input);
-//    }
-//
-//    @PostMapping("/math/calculate/sum")
-//    public OperationResultDTO calculateMin(@RequestBody String input) {
-//        String opName = "Sum";
-//
-//        return particularCommandExecutor.execute(opName, input);
-//    }
+    @PostMapping("/math/calculate/avg")
+    public OperationResultDTO calculateAvg(@RequestBody String input) {
+        return particularCommandExecutor.execute(CalculationAvailableOperations.AvgCalc,
+                                                 input);
+    }
+
+    @PostMapping("/math/calculate/max")
+    public OperationResultDTO calculateMax(@RequestBody String input) {
+        return particularCommandExecutor.execute(CalculationAvailableOperations.MaxCalc,
+                                                 input);
+    }
+
+    @PostMapping("/math/calculate/min")
+    public OperationResultDTO calculateMin(@RequestBody String input) {
+        return particularCommandExecutor.execute(CalculationAvailableOperations.MinCalc,
+                                                 input);
+    }
 }
