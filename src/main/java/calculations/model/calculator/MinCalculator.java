@@ -1,20 +1,22 @@
 package calculations.model.calculator;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+import java.util.List;
+
+@Component
 @ConditionalOnProperty(name = "calculation.min", havingValue = "true")
-public class MinCalculator extends  AbstractCalculation{
+public class MinCalculator extends AbstractCalculation {
 
     public MinCalculator() {
-        super("Min");
+        super(CalculationAvailableOperations.MinCalc);
     }
 
     @Override
-    public int execute() {
-        return numbers.stream()
-                .min(Integer::compareTo)
-                .get();
+    public int execute(List<Integer> data) {
+        return data.stream()
+                   .min(Integer::compareTo)
+                   .get();
     }
 }
