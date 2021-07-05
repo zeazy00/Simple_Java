@@ -4,17 +4,22 @@ import calculations.controller.dto.OperationResultDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
+public class PostBodySumCalcRestCtrlTest {
 
-    private String url = "/math/calculate/sum";
+    private final String url = "/math/calculate/sum";
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     void sumValidTest() throws Exception {
@@ -25,10 +30,9 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
 
         //act & assert
         String jsonString = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                  .contentType(MediaType.APPLICATION_JSON)
+                                                                  .contentType(APPLICATION_JSON)
                                                                   .content(bodyJson))
-                                   .andExpect(MockMvcResultMatchers.status()
-                                                                   .isOk())
+                                   .andExpect(status().isOk())
                                    .andReturn()
                                    .getResponse()
                                    .getContentAsString();
@@ -36,8 +40,8 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
         // assert
         OperationResultDTO resultDTO = mapper.readValue(jsonString, OperationResultDTO.class);
 
-        Assertions.assertEquals(resultDTO.getOperationName(), "Sum");
-        Assertions.assertEquals(resultDTO.getResult(), 34);
+        Assertions.assertEquals("Sum", resultDTO.getOperationName());
+        Assertions.assertEquals(34, resultDTO.getResult());
     }
 
     @Test
@@ -47,10 +51,9 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
 
         //act & assert
         mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .contentType(APPLICATION_JSON)
                                               .content(data))
-               .andExpect(MockMvcResultMatchers.status()
-                                               .isNonAuthoritativeInformation());
+               .andExpect(status().isNonAuthoritativeInformation());
 
     }
 
@@ -61,10 +64,9 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
 
         //act & assert
         mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .contentType(APPLICATION_JSON)
                                               .content(data))
-               .andExpect(MockMvcResultMatchers.status()
-                                               .isNonAuthoritativeInformation());
+               .andExpect(status().isNonAuthoritativeInformation());
 
     }
 }
