@@ -1,14 +1,12 @@
 package calculations.integration;
 
 import calculations.controller.dto.OperationResultDTO;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -23,22 +21,23 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
 
         //Arrange
         String bodyJson = "1454668";
-        Gson gson = new Gson();
+        ObjectMapper mapper = new ObjectMapper();
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(bodyJson));
-        //assert
-        MvcResult result = resultActions.andExpect(
-                MockMvcResultMatchers.status()
-                                     .isOk()).andReturn();
+        //act & assert
+        String jsonString = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                  .contentType(MediaType.APPLICATION_JSON)
+                                                                  .content(bodyJson))
+                                   .andExpect(MockMvcResultMatchers.status()
+                                                                   .isOk())
+                                   .andReturn()
+                                   .getResponse()
+                                   .getContentAsString();
 
-        String jsonString = result.getResponse().getContentAsString();
-        OperationResultDTO resultDTO = gson.fromJson(jsonString, OperationResultDTO.class);
+        // assert
+        OperationResultDTO resultDTO = mapper.readValue(jsonString, OperationResultDTO.class);
 
-        Assertions.assertEquals(resultDTO.getOperationName(),"Sum");
-        Assertions.assertEquals(resultDTO.getResult(),34);
+        Assertions.assertEquals(resultDTO.getOperationName(), "Sum");
+        Assertions.assertEquals(resultDTO.getResult(), 34);
     }
 
     @Test
@@ -46,14 +45,13 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
         //Arrange
         String data = "777777";
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(data));
+        //act & assert
+        mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(data))
+               .andExpect(MockMvcResultMatchers.status()
+                                               .isNonAuthoritativeInformation());
 
-        //assert
-        resultActions.andExpect(MockMvcResultMatchers.status()
-                                                     .isNonAuthoritativeInformation());
     }
 
     @Test
@@ -61,13 +59,12 @@ public class PostBodySumCalcRestCtrlTest extends BaseOperationCalcRestCtrlTest {
         //arrange
         String data = "3";
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(data));
+        //act & assert
+        mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(data))
+               .andExpect(MockMvcResultMatchers.status()
+                                               .isNonAuthoritativeInformation());
 
-        //assert
-        resultActions.andExpect(MockMvcResultMatchers.status()
-                                                     .isNonAuthoritativeInformation());
     }
 }

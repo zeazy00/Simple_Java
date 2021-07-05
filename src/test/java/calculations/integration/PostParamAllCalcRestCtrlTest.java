@@ -1,14 +1,12 @@
 package calculations.integration;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -26,19 +24,20 @@ public class PostParamAllCalcRestCtrlTest {
 
         //Arrange
         String input = "64968524";
-        Gson gson = new Gson();
+        ObjectMapper mapper = new ObjectMapper();
 
 
-        //Act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/math/calculate")
-                                                                            .param("input", input));
+        //Act & Assert
+        String jsonStringResult = mockMvc.perform(MockMvcRequestBuilders.post("/math/calculate")
+                                                                        .param("input", input))
+                                         .andExpect(MockMvcResultMatchers.status()
+                                                                         .isOk())
+                                         .andReturn()
+                                         .getResponse()
+                                         .getContentAsString();
 
         //Assert
-        MvcResult result = resultActions.andExpect(MockMvcResultMatchers.status()
-                                                                        .isOk())
-                                        .andReturn();
-        String jsonStringResult = result.getResponse().getContentAsString();
-        List operationResultList = gson.fromJson(jsonStringResult, List.class);
+        List operationResultList = mapper.readValue(jsonStringResult, List.class);
 
         Assertions.assertEquals(operationResultList.size(), 4);
     }

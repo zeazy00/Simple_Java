@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -26,15 +25,13 @@ public class BaseOperationCalcRestCtrlTest {
         //Arrange
         String bodyJson = "";
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(bodyJson));
+        //act & assert
+        mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(bodyJson))
+               .andExpect(MockMvcResultMatchers.status()
+                                               .isBadRequest());
 
-        //assert
-        resultActions.andExpect(
-                MockMvcResultMatchers.status()
-                                     .isBadRequest());
     }
 
     @Test
@@ -42,17 +39,16 @@ public class BaseOperationCalcRestCtrlTest {
         //Arrange
         String bodyJson = "45ds9e";
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(bodyJson));
+        //act & assert
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                                 .contentType(MediaType.APPLICATION_JSON)
+                                                                                 .content(bodyJson))
+                                                  .andExpect(MockMvcResultMatchers.status()
+                                                                                  .isBadRequest())
+                                                  .andReturn()
+                                                  .getResponse();
 
         //assert
-        MockHttpServletResponse response = resultActions.andExpect(MockMvcResultMatchers.status()
-                                                                                        .isBadRequest())
-                                                        .andReturn()
-                                                        .getResponse();
-
         Assertions.assertEquals("Input string must contain digits only",
                                 response.getContentAsString());
     }
@@ -62,17 +58,16 @@ public class BaseOperationCalcRestCtrlTest {
         //Arrange
         String bodyJson = "-4449";
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(bodyJson));
+        //act & assert
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                                 .contentType(MediaType.APPLICATION_JSON)
+                                                                                 .content(bodyJson))
+                                                  .andExpect(MockMvcResultMatchers.status()
+                                                                                  .isBadRequest())
+                                                  .andReturn()
+                                                  .getResponse();
 
         //assert
-        MockHttpServletResponse response = resultActions.andExpect(MockMvcResultMatchers.status()
-                                                                                        .isBadRequest())
-                                                        .andReturn()
-                                                        .getResponse();
-
         Assertions.assertEquals("Input string must contain digits only",
                                 response.getContentAsString());
     }
@@ -82,17 +77,16 @@ public class BaseOperationCalcRestCtrlTest {
         //arrange
         String data = "154666478";
 
-        //act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(data));
+        //act & assert
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                                 .contentType(MediaType.APPLICATION_JSON)
+                                                                                 .content(data))
+                                                  .andExpect(MockMvcResultMatchers.status()
+                                                                                  .isBadRequest())
+                                                  .andReturn()
+                                                  .getResponse();
 
         //assert
-        MockHttpServletResponse response = resultActions.andExpect(MockMvcResultMatchers.status()
-                                                                                        .isBadRequest())
-                                                        .andReturn()
-                                                        .getResponse();
-
         Assertions.assertEquals("Validation exception: Antichrist detected!!! Bonfire is waiting for you!",
                                 response.getContentAsString());
     }
@@ -107,16 +101,15 @@ public class BaseOperationCalcRestCtrlTest {
             data.append(i % 10);
         }
 
-        //Act
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                                                                            .contentType(MediaType.APPLICATION_JSON)
-                                                                            .content(data.toString()));
+        //Act & Assert
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                                                                                 .contentType(MediaType.APPLICATION_JSON)
+                                                                                 .content(data.toString()))
+                                                  .andExpect(MockMvcResultMatchers.status()
+                                                                                  .isBadRequest())
+                                                  .andReturn().getResponse();
 
         //Assert
-        MockHttpServletResponse response = resultActions.andExpect(MockMvcResultMatchers.status()
-                                                                                        .isBadRequest())
-                                                        .andReturn().getResponse();
-
         Assertions.assertEquals("Validation exception: Input number can't be bigger than 100 signs",
                                 response.getContentAsString());
     }
