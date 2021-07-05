@@ -26,25 +26,25 @@ public class CalculationRestController {
 
     @PostMapping("sum")
     public OperationResultDTO calculateSum(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.SumCalc,
+        return particularCommandExecutor.execute(CalculationAvailableOperations.SUM.getOpName(),
                                                  input);
     }
 
     @PostMapping("avg")
     public OperationResultDTO calculateAvg(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.AvgCalc,
+        return particularCommandExecutor.execute(CalculationAvailableOperations.AVG.getOpName(),
                                                  input);
     }
 
     @PostMapping("max")
     public OperationResultDTO calculateMax(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.MaxCalc,
+        return particularCommandExecutor.execute(CalculationAvailableOperations.MAX.getOpName(),
                                                  input);
     }
 
     @PostMapping("min")
     public OperationResultDTO calculateMin(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.MinCalc,
+        return particularCommandExecutor.execute(CalculationAvailableOperations.MIN.getOpName(),
                                                  input);
     }
 }
