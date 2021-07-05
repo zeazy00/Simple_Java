@@ -1,20 +1,22 @@
 package calculations.model.calculator;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+import java.util.List;
+
+@Component
 @ConditionalOnProperty(name = "calculation.max", havingValue = "true")
-public class MaxCalculator extends  AbstractCalculation{
+public class MaxCalculator extends AbstractCalculation {
 
-    public MaxCalculator(){
-        super("Max");
+    public MaxCalculator() {
+        super(CalculationAvailableOperations.MaxCalc);
     }
 
     @Override
-    public int execute() {
-        return numbers.stream()
-                .max(Integer::compare)
-                .get();
+    public int execute(List<Integer> data) {
+        return data.stream()
+                   .max(Integer::compare)
+                   .get();
     }
 }
