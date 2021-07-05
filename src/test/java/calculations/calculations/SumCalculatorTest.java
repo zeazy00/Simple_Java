@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class SumCalculatorTest {
 
+    Calculation calc = new SumCalculator();
+
     @Test
     public void execute() {
 
@@ -18,12 +20,7 @@ public class SumCalculatorTest {
         List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
                                    .boxed()
                                    .collect(Collectors.toList());
-
-        Calculation calc = new SumCalculator();
-
-        int expected = data.stream()
-                           .mapToInt(x -> x)
-                           .sum();
+        int expected = 26;
 
         //act
         int res = calc.execute(data);

@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 class MinCalculatorTest {
 
+    Calculation calc = new MinCalculator();
+
     @Test
     void execute() {
         //arrange
@@ -18,12 +20,7 @@ class MinCalculatorTest {
                                    .boxed()
                                    .collect(Collectors.toList());
 
-        Calculation calc = new MinCalculator();
-
-        int expected = data.stream()
-                           .mapToInt(x -> x)
-                           .min()
-                           .getAsInt();
+        int expected = 1;
 
         //act
         int res = calc.execute(data);

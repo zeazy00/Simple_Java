@@ -30,10 +30,10 @@ public class AllCommandExecutorAction implements AllCommandExecutor {
         if (!DataValidation.validateInput(input))
             throw new IllegalArgumentException("Input string must contain digits only");
 
+        preProcessValidation.forEach(x -> x.validate(input));
         List<OperationResultDTO> resultDTOS = new ArrayList<>();
 
         List<Integer> data = ListUtil.parseDigitsFromString(input);
-        preProcessValidation.forEach(x -> x.validate(input));
 
         calculationList.forEach(calculation -> {
             int result = calculation.execute(data);

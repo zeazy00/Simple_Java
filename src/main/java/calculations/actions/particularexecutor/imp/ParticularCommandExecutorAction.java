@@ -9,36 +9,52 @@ import calculations.model.validation.exceptions.MathOperationNotSupportedExcepti
 import calculations.model.validation.postprocess.OutputNumberValidator;
 import calculations.model.validation.preprocess.InputNumberValidator;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ParticularCommandExecutorAction implements ParticularCommandExecutor {
 
-    List<Calculation> calculationList;
+    Map<String, Calculation> calculationMap;
     List<OutputNumberValidator> postProcessValidations;
     List<InputNumberValidator> preProcessValidation;
+
+    @Autowired
+    public ParticularCommandExecutorAction(List<Calculation> calculationList,
+                                           List<OutputNumberValidator> postProcessValidations,
+                                           List<InputNumberValidator> preProcessValidation) {
+
+        this.postProcessValidations = postProcessValidations;
+        this.preProcessValidation = preProcessValidation;
+
+        calculationMap = new HashMap<>();
+
+        calculationList.forEach(calc -> {
+            calculationMap.put(calc.getOperationName(), calc);
+        });
+
+    }
+
 
     @Override
     public OperationResultDTO execute(String opName, String input) {
 
-        if(!DataValidation.validateInput(input))
+        if (!DataValidation.validateInput(input))
             throw new IllegalArgumentException("Input string must contain digits only");
 
-        Calculation calculation = calculationList.stream()
-                                                 .filter(x -> x.getOperationName()
-                                                               .equals(opName))
-                                                 .findFirst()
-                                                 .orElseThrow(
-                                                         () -> new MathOperationNotSupportedException(
-                                                                 String.format("Operation %s is not supported",
-                                                                               opName)));
         preProcessValidation.forEach(x -> x.validate(input));
+
+        Calculation calculation = calculationMap.get(opName);
+        if (calculation == null)
+            throw new MathOperationNotSupportedException(
+                    String.format("Operation %s is not supported",
+                                  opName));
 
         List<Integer> data = ListUtil.parseDigitsFromString(input);
         int result = calculation.execute(data);

@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 class AvgCalculatorTest {
 
+    Calculation calc = new AvgCalculator();
+
     @Test
     public void execute() {
 
@@ -19,12 +21,7 @@ class AvgCalculatorTest {
                                    .boxed()
                                    .collect(Collectors.toList());
 
-        Calculation calc = new AvgCalculator();
-
-        int expected = (int) data.stream()
-                                 .mapToInt(x -> x)
-                                 .average()
-                                 .getAsDouble();
+        int expected = 4;
 
         //act
         int res = calc.execute(data);

@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MaxCalculatorTest {
 
+    Calculation calculator = new MaxCalculator();
+
     @Test
     public void execute() {
         //arrange
         List<Integer> data = Arrays.stream(new int[]{14, 3648, 9987, 411, 366, 7489, 46})
                                    .boxed()
                                    .collect(Collectors.toList());
-
-        Calculation calculator = new MaxCalculator();
 
         int expected = 9987;
 
