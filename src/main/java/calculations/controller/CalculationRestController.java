@@ -3,12 +3,13 @@ package calculations.controller;
 import calculations.actions.allexecutor.AllCommandExecutor;
 import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
-import calculations.model.calculator.CalculationAvailableOperations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static calculations.model.calculator.CalculationAvailableOperations.*;
 
 @RestController
 @ConditionalOnProperty(value = "console", havingValue = "false")
@@ -26,25 +27,21 @@ public class CalculationRestController {
 
     @PostMapping("sum")
     public OperationResultDTO calculateSum(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.SUM.getOpName(),
-                                                 input);
+        return particularCommandExecutor.execute(SUM, input);
     }
 
     @PostMapping("avg")
     public OperationResultDTO calculateAvg(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.AVG.getOpName(),
-                                                 input);
+        return particularCommandExecutor.execute(AVG, input);
     }
 
     @PostMapping("max")
     public OperationResultDTO calculateMax(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.MAX.getOpName(),
-                                                 input);
+        return particularCommandExecutor.execute(MAX, input);
     }
 
     @PostMapping("min")
     public OperationResultDTO calculateMin(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.MIN.getOpName(),
-                                                 input);
+        return particularCommandExecutor.execute(MIN, input);
     }
 }

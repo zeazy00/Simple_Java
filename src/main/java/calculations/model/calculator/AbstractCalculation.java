@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public abstract class AbstractCalculation implements Calculation {
 
-    private final String operationName;
+    private final CalculationAvailableOperations operationName;
 
     public AbstractCalculation(CalculationAvailableOperations operationName) {
-        this.operationName = operationName.getOpName();
+        this.operationName = operationName;
     }
 }

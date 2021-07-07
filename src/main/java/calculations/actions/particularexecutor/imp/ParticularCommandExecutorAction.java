@@ -3,6 +3,7 @@ package calculations.actions.particularexecutor.imp;
 import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
 import calculations.model.calculator.Calculation;
+import calculations.model.calculator.CalculationAvailableOperations;
 import calculations.model.utils.DataValidation;
 import calculations.model.utils.ListUtil;
 import calculations.model.validation.exceptions.MathOperationNotSupportedException;
@@ -21,7 +22,7 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ParticularCommandExecutorAction implements ParticularCommandExecutor {
 
-    Map<String, Calculation> calculationMap;
+    Map<CalculationAvailableOperations, Calculation> calculationMap;
     List<OutputNumberValidator> postProcessValidations;
     List<InputNumberValidator> preProcessValidation;
 
@@ -43,7 +44,7 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
 
 
     @Override
-    public OperationResultDTO execute(String opName, String input) {
+    public OperationResultDTO execute(CalculationAvailableOperations opName, String input) {
 
         if (!DataValidation.validateInput(input))
             throw new IllegalArgumentException("Input string must contain digits only");
@@ -61,6 +62,7 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
 
         postProcessValidations.forEach(x -> x.validate(result));
 
-        return new OperationResultDTO(opName, result);
+        return new OperationResultDTO(opName.getOpName(),
+                                      result);
     }
 }
