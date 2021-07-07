@@ -1,5 +1,9 @@
 package calculations.integration;
 
+import calculations.controller.dto.OperationResultDTO;
+import calculations.model.calculator.CalculationAvailableOperations;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
+import static calculations.model.calculator.CalculationAvailableOperations.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -37,8 +42,29 @@ public class PostParamAllCalcRestCtrlTest {
                                          .getContentAsString();
 
         //Assert
-        List operationResultList = mapper.readValue(jsonStringResult, List.class);
+        List<OperationResultDTO> operationResultList = mapper.readValue(jsonStringResult,
+                                                                        new TypeReference<List<OperationResultDTO>>() {});
 
         Assertions.assertEquals(operationResultList.size(), 4);
+
+        OperationResultDTO sumResult = getResult(operationResultList, SUM);
+        Assertions.assertEquals(sumResult.getResult(), 44);
+
+        OperationResultDTO maxResult = getResult(operationResultList, MAX);
+        Assertions.assertEquals(maxResult.getResult(), 9);
+
+        OperationResultDTO minResult = getResult(operationResultList, MIN);
+        Assertions.assertEquals(minResult.getResult(), 2);
+
+        OperationResultDTO avgResult = getResult(operationResultList, AVG);
+        Assertions.assertEquals(avgResult.getResult(), 5);
+    }
+
+    private OperationResultDTO getResult(List<OperationResultDTO> source, CalculationAvailableOperations operatioName) {
+        return source.stream()
+                     .filter(x -> x.getOperationName()
+                                   .equals(operatioName.getOpName()))
+                     .findFirst()
+                     .get();
     }
 }

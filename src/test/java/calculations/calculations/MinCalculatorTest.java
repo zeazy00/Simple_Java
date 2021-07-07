@@ -2,6 +2,7 @@ package calculations.calculations;
 
 import calculations.model.calculator.Calculation;
 import calculations.model.calculator.MinCalculator;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,7 @@ class MinCalculatorTest {
     @Test
     void execute() {
         //arrange
-        List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
-                                   .boxed()
-                                   .collect(Collectors.toList());
+        List<Integer> data = Lists.newArrayList(1, 2, 8, 9, 4, 2);
 
         int expected = 1;
 

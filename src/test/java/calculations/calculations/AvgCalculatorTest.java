@@ -2,12 +2,11 @@ package calculations.calculations;
 
 import calculations.model.calculator.AvgCalculator;
 import calculations.model.calculator.Calculation;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 class AvgCalculatorTest {
 
@@ -16,10 +15,9 @@ class AvgCalculatorTest {
     @Test
     public void execute() {
 
+
         //arrange
-        List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
-                                   .boxed()
-                                   .collect(Collectors.toList());
+        List<Integer> data = Lists.newArrayList(1, 2, 8, 9, 4, 2);
 
         int expected = 4;
 

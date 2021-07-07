@@ -2,12 +2,11 @@ package calculations.calculations;
 
 import calculations.model.calculator.Calculation;
 import calculations.model.calculator.SumCalculator;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SumCalculatorTest {
 
@@ -17,9 +16,7 @@ public class SumCalculatorTest {
     public void execute() {
 
         //arrange
-        List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
-                                   .boxed()
-                                   .collect(Collectors.toList());
+        List<Integer> data = Lists.newArrayList(1, 2, 8, 9, 4, 2);
         int expected = 26;
 
         //act
