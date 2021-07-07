@@ -1,11 +1,8 @@
 package calculations.integration;
 
 import calculations.controller.dto.OperationResultDTO;
-import calculations.model.calculator.CalculationAvailableOperations;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,11 +13,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.List;
 
 import static calculations.model.calculator.CalculationAvailableOperations.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PostParamAllCalcRestCtrlTest {
+public class PostParamAllCalcRestIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -45,26 +44,24 @@ public class PostParamAllCalcRestCtrlTest {
         List<OperationResultDTO> operationResultList = mapper.readValue(jsonStringResult,
                                                                         new TypeReference<List<OperationResultDTO>>() {});
 
-        Assertions.assertEquals(operationResultList.size(), 4);
+        assertThat(operationResultList).size().isEqualTo(4);
 
-        OperationResultDTO sumResult = getResult(operationResultList, SUM);
-        Assertions.assertEquals(sumResult.getResult(), 44);
+        assertThat(operationResultList)
+                .extracting("Result", "OperationName")
+                .contains(tuple(44, SUM.getOpName()));
 
-        OperationResultDTO maxResult = getResult(operationResultList, MAX);
-        Assertions.assertEquals(maxResult.getResult(), 9);
+        assertThat(operationResultList)
+                .extracting("Result", "OperationName")
+                .contains(tuple(5, AVG.getOpName()));
 
-        OperationResultDTO minResult = getResult(operationResultList, MIN);
-        Assertions.assertEquals(minResult.getResult(), 2);
+        assertThat(operationResultList)
+                .extracting("Result", "OperationName")
+                .contains(tuple(2, MIN.getOpName()));
 
-        OperationResultDTO avgResult = getResult(operationResultList, AVG);
-        Assertions.assertEquals(avgResult.getResult(), 5);
+        assertThat(operationResultList)
+                .extracting("Result", "OperationName")
+                .contains(tuple(9, MAX.getOpName()));
+
     }
 
-    private OperationResultDTO getResult(List<OperationResultDTO> source, CalculationAvailableOperations operatioName) {
-        return source.stream()
-                     .filter(x -> x.getOperationName()
-                                   .equals(operatioName.getOpName()))
-                     .findFirst()
-                     .get();
-    }
 }

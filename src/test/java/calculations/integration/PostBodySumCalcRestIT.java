@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PostBodySumCalcRestCtrlTest {
+public class PostBodySumCalcRestIT {
 
     private final String url = "/math/calculate/sum";
     @Autowired
