@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="img/calc_icon.png">
+    <link rel="stylesheet" href="CSS/styles.css">
+
     <title>Calculators</title>
 </head>
 <body>
+<header>
+    <img src="img/calc_icon.png" height="96" width="96"/>
+    <nav>
+        <label class="menu-label">
+            All
+            <input type="radio"
+                   name="operation"
+                   class="menu-input"
+                   checked
+                   >
+        </label>
+        <label class="menu-label">
+            Min
+            <input type="radio"
+                   name="operation"
+                   class="menu-input"
+                   >
+        </label>
+        <label class="menu-label">
+            Max
+            <input type="radio"
+                   name="operation"
+                   class="menu-input">
+        </label>
+        <label class="menu-label">
+            Sum
+            <input type="radio"
+                   name="operation"
+                   class="menu-input"
+                   >
+        </label>
+        <label class="menu-label">
+            Avg
+            <input type="radio"
+                   name="operation"
+                   class="menu-input">
+        </label>
+    </nav>
+</header>
+<!--add content by center-->
+<article class="page-content">
+    <section>
+        <h2>Execute</h2>
+        <form action="">
+            <input type="text"
+                   id="input" name="input">
+            <button id="submit" name="submit"/>
+        </form>
+    </section>
+    <div>
+        <table>
+            <thead id="result_table_head">
+            <tr>
+                <td>name</td>
+                <td>result</td>
+            </tr>
+            </thead>
+            <tbody id="result_table_body">
 
+            </tbody>
+        </table>
+    </div>
+</article>
+<footer>
+
+</footer>
+<script src="JS/menu-selection.js"></script>
 </body>
 </html>
