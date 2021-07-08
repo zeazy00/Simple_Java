@@ -37,32 +37,32 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
         calculationMap = new HashMap<>();
 
         calculationList.forEach(calc -> {
-            calculationMap.put(calc.getOperationName(), calc);
+            calculationMap.put(calc.getOperation(), calc);
         });
 
     }
 
 
     @Override
-    public OperationResultDTO execute(CalculationAvailableOperations opName, String input) {
+    public OperationResultDTO execute(CalculationAvailableOperations operation, String input) {
 
         if (!DataValidation.validateInput(input))
             throw new IllegalArgumentException("Input string must contain digits only");
 
         preProcessValidation.forEach(x -> x.validate(input));
 
-        Calculation calculation = calculationMap.get(opName);
+        Calculation calculation = calculationMap.get(operation);
         if (calculation == null)
             throw new MathOperationNotSupportedException(
                     String.format("Operation %s is not supported",
-                                  opName));
+                                  operation));
 
         List<Integer> data = ListUtil.parseDigitsFromString(input);
         int result = calculation.execute(data);
 
         postProcessValidations.forEach(x -> x.validate(result));
 
-        return new OperationResultDTO(opName.getOpName(),
+        return new OperationResultDTO(operation.getOpName(),
                                       result);
     }
 }

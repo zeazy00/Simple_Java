@@ -46,21 +46,11 @@ public class PostParamAllCalcRestIT {
 
         assertThat(operationResultList).size().isEqualTo(4);
 
-        assertThat(operationResultList)
-                .extracting("Result", "OperationName")
-                .contains(tuple(44, SUM.getOpName()));
-
-        assertThat(operationResultList)
-                .extracting("Result", "OperationName")
-                .contains(tuple(5, AVG.getOpName()));
-
-        assertThat(operationResultList)
-                .extracting("Result", "OperationName")
-                .contains(tuple(2, MIN.getOpName()));
-
-        assertThat(operationResultList)
-                .extracting("Result", "OperationName")
-                .contains(tuple(9, MAX.getOpName()));
+        assertThat(operationResultList).extracting("Result", "OperationName")
+                                       .containsOnly(tuple(44, SUM.getOpName()),
+                                                     tuple(5, AVG.getOpName()),
+                                                     tuple(2, MIN.getOpName()),
+                                                     tuple(9, MAX.getOpName()));
 
     }
 
