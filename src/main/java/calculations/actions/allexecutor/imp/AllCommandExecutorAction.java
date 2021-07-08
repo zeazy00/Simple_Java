@@ -38,7 +38,7 @@ public class AllCommandExecutorAction implements AllCommandExecutor {
         calculationList.forEach(calculation -> {
             int result = calculation.execute(data);
             postProcessValidations.forEach(val -> val.validate(result));
-            resultDTOS.add(new OperationResultDTO(calculation.getOperationName()
+            resultDTOS.add(new OperationResultDTO(calculation.getOperation()
                                                              .getOpName(),
                                                   result));
         });
