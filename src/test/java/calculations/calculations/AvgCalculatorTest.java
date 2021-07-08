@@ -2,29 +2,24 @@ package calculations.calculations;
 
 import calculations.model.calculator.AvgCalculator;
 import calculations.model.calculator.Calculation;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 class AvgCalculatorTest {
+
+    Calculation calc = new AvgCalculator();
 
     @Test
     public void execute() {
 
+
         //arrange
-        List<Integer> data = Arrays.stream(new int[]{1, 2, 8, 9, 4, 2})
-                                   .boxed()
-                                   .collect(Collectors.toList());
+        List<Integer> data = Lists.newArrayList(1, 2, 8, 9, 4, 2);
 
-        Calculation calc = new AvgCalculator();
-
-        int expected = (int) data.stream()
-                                 .mapToInt(x -> x)
-                                 .average()
-                                 .getAsDouble();
+        int expected = 4;
 
         //act
         int res = calc.execute(data);

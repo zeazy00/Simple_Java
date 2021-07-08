@@ -3,50 +3,45 @@ package calculations.controller;
 import calculations.actions.allexecutor.AllCommandExecutor;
 import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
-import calculations.model.calculator.CalculationAvailableOperations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static calculations.model.calculator.CalculationAvailableOperations.*;
 
 @RestController
 @ConditionalOnProperty(value = "console", havingValue = "false")
 @RequiredArgsConstructor
+@RequestMapping("/math/calculate")
 public class CalculationRestController {
 
     private final ParticularCommandExecutor particularCommandExecutor;
     private final AllCommandExecutor allCommandExecutor;
 
-    @PostMapping("/math/calculate")
+    @PostMapping
     public List<OperationResultDTO> calculateAllByParam(@RequestParam String input) {
         return allCommandExecutor.executeAll(input);
     }
 
-    @PostMapping("/math/calculate/sum")
+    @PostMapping("sum")
     public OperationResultDTO calculateSum(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.SumCalc,
-                                                 input);
+        return particularCommandExecutor.execute(SUM, input);
     }
 
-    @PostMapping("/math/calculate/avg")
+    @PostMapping("avg")
     public OperationResultDTO calculateAvg(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.AvgCalc,
-                                                 input);
+        return particularCommandExecutor.execute(AVG, input);
     }
 
-    @PostMapping("/math/calculate/max")
+    @PostMapping("max")
     public OperationResultDTO calculateMax(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.MaxCalc,
-                                                 input);
+        return particularCommandExecutor.execute(MAX, input);
     }
 
-    @PostMapping("/math/calculate/min")
+    @PostMapping("min")
     public OperationResultDTO calculateMin(@RequestBody String input) {
-        return particularCommandExecutor.execute(CalculationAvailableOperations.MinCalc,
-                                                 input);
+        return particularCommandExecutor.execute(MIN, input);
     }
 }
