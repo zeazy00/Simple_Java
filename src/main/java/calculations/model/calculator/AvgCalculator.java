@@ -10,7 +10,7 @@ import java.util.List;
 public class AvgCalculator extends AbstractCalculation {
 
     public AvgCalculator() {
-        super(CalculationAvailableOperations.AvgCalc);
+        super(CalculationAvailableOperations.AVG);
     }
 
     @Override

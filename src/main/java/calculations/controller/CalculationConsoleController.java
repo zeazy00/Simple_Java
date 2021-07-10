@@ -42,7 +42,7 @@ public class CalculationConsoleController {
 
     private void outputResult(int result, Calculation calculation) {
         String message = String.format("Result of %s operation is %d\n",
-                                       calculation.getOperationName(),
+                                       calculation.getOperation(),
                                        result);
 
         outputProvider.output(message);

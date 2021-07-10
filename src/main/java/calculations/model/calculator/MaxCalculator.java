@@ -10,7 +10,7 @@ import java.util.List;
 public class MaxCalculator extends AbstractCalculation {
 
     public MaxCalculator() {
-        super(CalculationAvailableOperations.MaxCalc);
+        super(CalculationAvailableOperations.MAX);
     }
 
     @Override

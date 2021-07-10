@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Calculation {
     int execute(List<Integer> data);
-    String getOperationName();
+    CalculationAvailableOperations getOperation();
 }
