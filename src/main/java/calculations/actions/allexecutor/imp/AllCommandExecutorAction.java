@@ -3,6 +3,7 @@ package calculations.actions.allexecutor.imp;
 import calculations.actions.allexecutor.AllCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
 import calculations.model.calculator.Calculation;
+import calculations.model.repository.MathExpressionRepository;
 import calculations.model.utils.DataValidation;
 import calculations.model.utils.ListUtil;
 import calculations.model.validation.postprocess.OutputNumberValidator;
@@ -23,6 +24,7 @@ public class AllCommandExecutorAction implements AllCommandExecutor {
     List<Calculation> calculationList;
     List<OutputNumberValidator> postProcessValidations;
     List<InputNumberValidator> preProcessValidation;
+    MathExpressionRepository repository;
 
     @Override
     public List<OperationResultDTO> executeAll(String input) {
@@ -32,6 +34,7 @@ public class AllCommandExecutorAction implements AllCommandExecutor {
 
         preProcessValidation.forEach(x -> x.validate(input));
         List<OperationResultDTO> resultDTOS = new ArrayList<>();
+//        List<MathExpression> entities = new ArrayList<>();
 
         List<Integer> data = ListUtil.parseDigitsFromString(input);
 
@@ -41,7 +44,13 @@ public class AllCommandExecutorAction implements AllCommandExecutor {
             resultDTOS.add(new OperationResultDTO(calculation.getOperation()
                                                              .getOpName(),
                                                   result));
+
+//            entities.add(new MathExpression(input,
+//                                             calculation.getOperation(),
+//                                             result));
         });
+
+//        repository.saveAll(entities);
 
         return resultDTOS;
     }
