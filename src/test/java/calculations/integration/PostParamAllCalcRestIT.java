@@ -35,7 +35,7 @@ public class PostParamAllCalcRestIT {
         //Act & Assert
         String jsonStringResult = mockMvc.perform(MockMvcRequestBuilders.post("/math/calculate")
                                                                         .param("input", input))
-                                         .andExpect(status().isOk())
+                                         .andExpect(status().isCreated())
                                          .andReturn()
                                          .getResponse()
                                          .getContentAsString();

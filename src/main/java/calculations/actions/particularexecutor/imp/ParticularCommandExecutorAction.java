@@ -4,6 +4,7 @@ import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
 import calculations.model.calculator.Calculation;
 import calculations.model.calculator.CalculationAvailableOperations;
+import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
 import calculations.model.utils.DataValidation;
 import calculations.model.utils.ListUtil;
@@ -64,7 +65,7 @@ public class ParticularCommandExecutorAction implements ParticularCommandExecuto
 
         postProcessValidations.forEach(x -> x.validate(result));
 
-//        repository.save(new MathExpression(input, operation, result));
+        repository.save(new MathExpression(input, operation, result));
 
         return new OperationResultDTO(operation.getOpName(),
                                       result);

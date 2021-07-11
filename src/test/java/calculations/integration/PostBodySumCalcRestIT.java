@@ -32,7 +32,7 @@ public class PostBodySumCalcRestIT {
         String jsonString = mockMvc.perform(MockMvcRequestBuilders.post(url)
                                                                   .contentType(APPLICATION_JSON)
                                                                   .content(bodyJson))
-                                   .andExpect(status().isOk())
+                                   .andExpect(status().isCreated())
                                    .andReturn()
                                    .getResponse()
                                    .getContentAsString();
