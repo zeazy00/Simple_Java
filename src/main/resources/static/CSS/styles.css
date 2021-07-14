@@ -1,52 +1,20 @@
 @import "dropstyles.css";
-@import "animation.css";
+@import "pagebuildingblocks.css";
 @import "fonts.css";
-
-body{
-    padding: 5px;
-    color:#1d3557;
-}
-
-.page-content {
-    width: 70%;
-    margin-left:auto;
-    margin-right:auto;
-    padding: 5px 10px;
-}
+@import "animation.css";
 
 .menu-label{
-    font-size: 28px;
-    user-select: none;
-    letter-spacing: 1px;
-    line-height: 35px;
     cursor: pointer;
     margin: 2px 5px;
     display: block;
+    user-select: none;
 }
-
 .calculation-navigation>.menu-input{
     visibility: collapse;
 }
 
-.horizontal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.head {
-    width: 80%;
-    margin-left:auto;
-    margin-right:auto;
-
-    padding: 10px;
-    background: #A8DADC;
-    border-radius: 20px;
-    min-width: 1024px;
-}
-
 .calculation-navigation {
-    border: 3px #f1faee solid;
+    border: 3px #006d77 solid;
     border-radius: 10px;
     padding: 5px;
     justify-content: flex-end;
@@ -82,9 +50,12 @@ h3{
     border-radius: 10px;
 }
 
-.submit-button:hover{
-    background: #457b9d;
-    color: white;
-    border-color: #1d3557;
+.calculation-zone {
+    background: #EDF6F9;
+    flex: 0 0 auto;
 }
 
+.history-zone {
+    background: white;
+    flex: 1 0 auto;
+}

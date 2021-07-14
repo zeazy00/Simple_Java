@@ -9,7 +9,7 @@
     <title>Calculators</title>
 </head>
 <body>
-<header class="horizontal head">
+<header class="horizontal info">
     <div class="horizontal hello">
         <img src="img/calc_icon.png" height="96" width="96"
              alt="Calculator image"/>
@@ -57,43 +57,45 @@
                class="menu-input">
     </nav>
 </header>
-<!--add content by center-->
-<article class="page-content">
-    <section>
-        <h2>Execute</h2>
-        <form action="">
-            <section>
-                <h3>Data</h3>
-                <input type="text"
-                       class="data-input"
-                       id="input" name="input">
-                <button id="submit" name="submit"
-                        class="submit-button">Go!
-                </button>
-            </section>
-            <h3>Result</h3>
-            <input type="text" id="result"
-                   readonly
-                   class="operation-result">
-        </form>
-    </section>
-    <div>
-        <table>
-            <thead id="result_table_head">
-            <tr>
-                <td>name</td>
-                <td>result</td>
-            </tr>
-            </thead>
-            <tbody id="result_table_body">
+<div class="content-footer-wrapper">
+    <article class="hole-content">
+        <section class="calculation-zone content">
+            <h2>Execute</h2>
+            <form action="">
+                <section>
+                    <h3>Data</h3>
+                    <input type="text"
+                           class="data-input"
+                           id="input" name="input">
+                    <button id="submit" name="submit"
+                            class="submit-button">Go!
+                    </button>
+                </section>
+                <h3>Result</h3>
+                <input type="text" id="result"
+                       readonly
+                       class="operation-result">
+            </form>
+        </section>
+        <section class="history-zone content">
+            <table>
+                <thead id="result_table_head">
+                <tr>
+                    <td>name</td>
+                    <td>result</td>
+                </tr>
+                </thead>
+                <tbody id="result_table_body">
 
-            </tbody>
-        </table>
-    </div>
-</article>
-<footer>
+                </tbody>
+            </table>
+        </section>
+    </article>
 
-</footer>
+    <footer class="horizontal info">
+
+    </footer>
+</div>
 <script src="JS/menu-selection.js"></script>
 </body>
 </html>

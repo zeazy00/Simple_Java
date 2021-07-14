@@ -34,3 +34,9 @@ h3{
     line-height: 24px;
     letter-spacing: 1px;
 }
+
+.menu-label{
+    font-size: 28px;
+    letter-spacing: 1px;
+    line-height: 35px;
+}

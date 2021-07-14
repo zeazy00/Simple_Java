@@ -1,0 +1,36 @@
+@import "dropstyles.css";
+
+body{
+    color:#1d3557;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content{
+    padding: 0 15%;
+}
+
+.info{
+    width: 100%;
+    padding: 20px 10%;
+    background: #ffddd2;
+
+    min-width: 1024px;
+}
+
+.content-footer-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.hole-content {
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-direction: column;
+}

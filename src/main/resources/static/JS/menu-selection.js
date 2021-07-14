@@ -6,11 +6,11 @@ window.onload = (ev => {
         chBox.onchange = () => {
             if (chBox.checked){
                 if(prevLabel != null){
-                    prevLabel.style.color = "black"
+                    prevLabel.style.color = "black";
                 }
-
+                //todo: create normal style with shadow
                 const label = chBox.previousElementSibling;
-                label.style.color = "#457b9d";
+                label.style.color = "#d0512d";
                 prevLabel = label;
             }
         }
