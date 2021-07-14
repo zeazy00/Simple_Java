@@ -10,7 +10,7 @@ window.onload = (ev => {
                 }
 
                 const label = chBox.parentElement;
-                label.style.color = "red";
+                label.style.color = "#457b9d";
                 prevLabel = label;
             }
         }

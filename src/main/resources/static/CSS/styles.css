@@ -1,13 +1,64 @@
 @import "dropstyles.css";
 @import "animation.css";
+@import "fonts.css";
+
+body{
+    padding: 5px;
+    color:#1d3557;
+}
 
 .page-content {
+    width: 70%;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 5px 10px;
 }
 
 .menu-label{
-
+    font-size: 28px;
+    user-select: none;
+    letter-spacing: 1px;
+    line-height: 35px;
+    cursor: pointer;
+    margin: 2px 5px;
+    display: block;
 }
 
-.menu-input{
+.calculation-navigation>.menu-input{
+    visibility: collapse;
+}
 
+/*.menu-label:checked{*/
+/*    color: #457b9d;*/
+/*}*/
+
+.horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.head {
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+
+    padding: 10px;
+    background: #A8DADC;
+    border-radius: 20px;
+}
+
+.calculation-navigation {
+    border: 3px #f1faee solid;
+    border-radius: 10px;
+    padding: 5px;
+    justify-content: flex-end;
+}
+
+.hello {
+    justify-content: start;
+}
+
+.title {
+    margin: 5px 10px;
 }
