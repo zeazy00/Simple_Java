@@ -11,40 +11,46 @@
 <body>
 <header class="horizontal head">
     <div class="horizontal hello">
-        <img src="img/calc_icon.png" height="96" width="96"/>
+        <img src="img/calc_icon.png" height="96" width="96"
+             alt="Calculator image"/>
         <section class="title-section">
             <h1>Easy way to...</h1>
             <p class="header-caption">Execute digits operations</p>
         </section>
     </div>
 
-    <nav class="horizontal calculation-navigation">
-        <label class="menu-label" for="all_input">All</label>
+    <nav class="horizontal calculation-navigation"
+         title="Available operations">
+        <label class="menu-label" for="all_input"
+               title="Execute all available">All</label>
         <input type="radio"
                id="all_input"
                name="operation"
                class="menu-input"
                checked>
 
-        <label class="menu-label" for="min_input">Min</label>
+        <label class="menu-label" for="min_input"
+               title="&rdquo;Minimum of&rdquo; operation">Min</label>
         <input type="radio"
                id="min_input"
                name="operation"
                class="menu-input">
 
-        <label class="menu-label" for="max_input">Max</label>
+        <label class="menu-label" for="max_input" title="&rdquo;Maximum of&rdquo; operation">Max</label>
         <input type="radio"
                id="max_input"
                name="operation"
                class="menu-input">
 
-        <label class="menu-label" for="sum_input">Sum</label>
+        <label class="menu-label" for="sum_input"
+               title="&rdquo;Sum of&rdquo; operation">Sum</label>
         <input type="radio"
                id="sum_input"
                name="operation"
                class="menu-input">
 
-        <label class="menu-label" for="avg_input">Avg</label>
+        <label class="menu-label" for="avg_input"
+               title="&rdquo;Average of&rdquo; operation">Avg</label>
         <input type="radio"
                id="avg_input"
                name="operation"
@@ -56,9 +62,19 @@
     <section>
         <h2>Execute</h2>
         <form action="">
-            <input type="text"
-                   id="input" name="input">
-            <button id="submit" name="submit"/>
+            <section>
+                <h3>Data</h3>
+                <input type="text"
+                       class="data-input"
+                       id="input" name="input">
+                <button id="submit" name="submit"
+                        class="submit-button">Go!
+                </button>
+            </section>
+            <h3>Result</h3>
+            <input type="text" id="result"
+                   readonly
+                   class="operation-result">
         </form>
     </section>
     <div>
