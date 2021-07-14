@@ -9,7 +9,7 @@ window.onload = (ev => {
                     prevLabel.style.color = "black"
                 }
 
-                const label = chBox.parentElement;
+                const label = chBox.previousElementSibling;
                 label.style.color = "#457b9d";
                 prevLabel = label;
             }
