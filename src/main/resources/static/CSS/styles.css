@@ -46,6 +46,7 @@ body{
     padding: 10px;
     background: #A8DADC;
     border-radius: 20px;
+    min-width: 1024px;
 }
 
 .calculation-navigation {
@@ -59,6 +60,6 @@ body{
     justify-content: start;
 }
 
-.title {
-    margin: 5px 10px;
+.title-section {
+    margin: 5px 20px;
 }
