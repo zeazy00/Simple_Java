@@ -1,6 +1,7 @@
 h1,
 .header-caption,
-h3{
+.calculation-header,
+.footer-header{
     text-align: center;
     text-transform: uppercase;
 }
@@ -29,7 +30,8 @@ h2{
     line-height: 37px;
 }
 
-h3{
+.calculation-header,
+.footer-header{
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 1px;
@@ -39,4 +41,30 @@ h3{
     font-size: 28px;
     letter-spacing: 1px;
     line-height: 35px;
+}
+
+.footer-header {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 2px;
+}
+
+.footer-text {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    display: inline-block;
+    width: 260px;
+    text-indent: 8px;
+}
+
+.rights-reserve {
+    text-align: center;
+    font-size: 16px;
+}
+
+.inline-ref {
+    font-style: italic;
+    color: #d0512d;
+    text-decoration: underline;
 }

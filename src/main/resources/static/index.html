@@ -37,7 +37,8 @@
                name="operation"
                class="menu-input">
 
-        <label class="menu-label" for="max_input" title="&rdquo;Maximum of&rdquo; operation">Max</label>
+        <label class="menu-label" for="max_input"
+               title="&rdquo;Maximum of&rdquo; operation">Max</label>
         <input type="radio"
                id="max_input"
                name="operation"
@@ -64,7 +65,7 @@
             <h2>Execute</h2>
             <form id="input_form">
                 <section>
-                    <h3>Data</h3>
+                    <h3 class="calculation-header">Data</h3>
                     <input type="text"
                            class="data-input"
                            id="input" name="input">
@@ -72,7 +73,7 @@
                             class="submit-button">Go!
                     </button>
                 </section>
-                <h3>Result</h3>
+                <h3 class="calculation-header">Result</h3>
                 <input type="text" id="result"
                        readonly
                        class="operation-result">
@@ -102,8 +103,49 @@
         </section>
     </article>
 
-    <footer class="horizontal info">
-
+    <footer class="info">
+        <div class="horizontal footer-info">
+            <section class="footer-block">
+                <h3 class="footer-header">about</h3>
+                <p class="footer-text">Service allows you to perform various operations over inline digits</p>
+            </section>
+            <section class="footer-block">
+                <h3 class="footer-header">about author</h3>
+                <p class="footer-text">This site is made during practice course. Contact me:</p>
+                <section class="horizontal footer-info">
+                    <a href="https://github.com/WelcomeDev" target="_blank">
+                        <img src="img/github_icon.svg"
+                             class="contact-icon"
+                             alt="https://github.com/WelcomeDev">
+                    </a>
+                    <a href="mailto:fedor.ishchenko.18@gmail.com">
+                        <img src="img/email_icon.svg"
+                             class="contact-icon"
+                             alt="fedor.ishchenko.18@gmail.com">
+                    </a>
+                </section>
+            </section>
+            <section class="footer-block">
+                <h3 class="footer-header">about company</h3>
+                <p class="footer-text">
+                    Also this site is available thanks to
+                    <a class="inline-ref"
+                       target="_blank"
+                       href="https://thewhite.ru/">
+                        TheWhiteSoft
+                    </a>
+                </p>
+                <section class="horizontal footer-info">
+                    <a href="https://github.com/WelcomeDev" target="_blank">
+                        <img src="img/github_icon.svg"
+                             class="contact-icon"
+                             alt="https://github.com/thewhitesoft">
+                    </a>
+                </section>
+            </section>
+        </div>
+        <hr class="horizontal-line" width="100%" size="5" color="#457b9d" />
+        <p class="rights-reserve" >© 2018 - WelcomeDev, <span style="font-style: italic">NO</span> RIGHTS RESERVED ☹️</p>
     </footer>
 </div>
 <script src="JS/menu-selection.js"></script>
