@@ -1,0 +1,20 @@
+#execution-history-table{
+    margin: 10px 4px 4px;
+    border-collapse:collapse;
+    border:1px solid #006d77;
+}
+
+#execution-history-table td{
+    border:1px solid #006d77;
+    padding: 4px;
+}
+
+#execution-history-table thead{
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+#execution-history-table thead td{
+    padding: 4px 30px 4px 4px;
+}

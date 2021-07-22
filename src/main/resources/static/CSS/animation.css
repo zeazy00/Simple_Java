@@ -1,5 +1,13 @@
-.submit-button:hover{
+.submit-button:hover {
     background: #457b9d;
     color: white;
     border-color: #1d3557;
+}
+
+.menu-label:hover {
+    color: #83c5be;
+}
+
+.menu-label:checked {
+    color: #d0512d;
 }

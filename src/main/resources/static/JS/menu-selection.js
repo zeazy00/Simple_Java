@@ -8,7 +8,8 @@ window.onload = (ev => {
                 if(prevLabel != null){
                     prevLabel.style.color = "black";
                 }
-                //todo: create normal style with shadow
+
+                //todo: normal switch with classes
                 const label = chBox.previousElementSibling;
                 label.style.color = "#d0512d";
                 prevLabel = label;

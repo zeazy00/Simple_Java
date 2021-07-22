@@ -1,7 +1,7 @@
 @import "dropstyles.css";
 @import "pagebuildingblocks.css";
+@import "tablestyles.css";
 @import "fonts.css";
-@import "animation.css";
 
 .menu-label{
     cursor: pointer;
@@ -9,6 +9,7 @@
     display: block;
     user-select: none;
 }
+
 .calculation-navigation>.menu-input{
     visibility: collapse;
 }
@@ -58,4 +59,13 @@ h3{
 .history-zone {
     background: white;
     flex: 1 0 auto;
+}
+
+.history-table-header {
+    display: inline-block;
+}
+
+.history-table-filter-menu {
+    cursor: pointer;
+    margin: 2px 2px 2px 6px;
 }

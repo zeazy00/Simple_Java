@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="img/calc_icon.png">
     <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" href="CSS/animation.css">
 
     <title>Calculators</title>
 </head>
@@ -61,7 +62,7 @@
     <article class="hole-content">
         <section class="calculation-zone content">
             <h2>Execute</h2>
-            <form action="">
+            <form id="input_form">
                 <section>
                     <h3>Data</h3>
                     <input type="text"
@@ -78,15 +79,24 @@
             </form>
         </section>
         <section class="history-zone content">
-            <table>
+            <div>
+                <h2 class="history-table-header">Execution history</h2>
+                <img src="img/burger_icon.svg"
+                     height="36" width="36"
+                     class="history-table-filter-menu"
+                     onclick="alert('On progress!')"
+                     alt="Table filter menu"
+                     title="Table filter menu">
+            </div>
+            <table id="execution-history-table">
                 <thead id="result_table_head">
                 <tr>
                     <td>name</td>
                     <td>result</td>
+                    <td>date</td>
                 </tr>
                 </thead>
                 <tbody id="result_table_body">
-
                 </tbody>
             </table>
         </section>
