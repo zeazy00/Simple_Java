@@ -8,6 +8,6 @@
     color: #83c5be;
 }
 
-.menu-label:checked {
+input[type="radio"]:checked + .menu-label{
     color: #d0512d;
 }
