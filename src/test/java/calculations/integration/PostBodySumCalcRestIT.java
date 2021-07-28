@@ -1,6 +1,8 @@
 package calculations.integration;
 
 import calculations.controller.dto.OperationResultDTO;
+import calculations.controller.dto.ParticularOperationRequestDTO;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static calculations.model.calculator.CalculationAvailableOperations.SUM;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -17,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class PostBodySumCalcRestIT {
 
-    private final String url = "/math/calculate/sum";
+    private final String url = "/math/calculate/particular";
     @Autowired
     private MockMvc mockMvc;
 
@@ -25,8 +28,10 @@ public class PostBodySumCalcRestIT {
     void sumValidTest() throws Exception {
 
         //Arrange
-        String bodyJson = "1454668";
+        ParticularOperationRequestDTO requestDTO = new ParticularOperationRequestDTO("1454668",
+                                                                                     SUM);
         ObjectMapper mapper = new ObjectMapper();
+        String bodyJson = mapper.writeValueAsString(requestDTO);
 
         //act & assert
         String jsonString = mockMvc.perform(MockMvcRequestBuilders.post(url)
@@ -47,7 +52,10 @@ public class PostBodySumCalcRestIT {
     @Test
     void meaningOfLifeInputTest() throws Exception {
         //Arrange
-        String data = "777777";
+        ParticularOperationRequestDTO requestDTO = new ParticularOperationRequestDTO("777777",
+                                                                                     SUM);
+        ObjectMapper mapper = new ObjectMapper();
+        String data = mapper.writeValueAsString(requestDTO);
 
         //act & assert
         mockMvc.perform(MockMvcRequestBuilders.post(url)
@@ -60,7 +68,11 @@ public class PostBodySumCalcRestIT {
     @Test
     void badNumberInputTest() throws Exception {
         //arrange
-        String data = "3";
+        //Arrange
+        ParticularOperationRequestDTO requestDTO = new ParticularOperationRequestDTO("3",
+                                                                                     SUM);
+        ObjectMapper mapper = new ObjectMapper();
+        String data = mapper.writeValueAsString(requestDTO);
 
         //act & assert
         mockMvc.perform(MockMvcRequestBuilders.post(url)
