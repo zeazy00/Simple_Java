@@ -39,7 +39,8 @@ public class RestControllerDbIT {
     @DataSet(cleanBefore = true, cleanAfter = true)
     public void checkSuccessfulCreation() throws Exception {
         //arrange
-        ParticularOperationRequestDTO requestDTO = new ParticularOperationRequestDTO("45463", SUM);
+        String numberInput = "45463";
+        ParticularOperationRequestDTO requestDTO = new ParticularOperationRequestDTO(numberInput, SUM);
         ObjectMapper mapper = new ObjectMapper();
         String input = mapper.writeValueAsString(requestDTO);
 
@@ -53,12 +54,12 @@ public class RestControllerDbIT {
         List<MathExpression> allMathExpressions = repository.findAll();
         assertThat(allMathExpressions).size().isEqualTo(1);
 
-        List<MathExpression> dbMathExpressions = repository.findByInput(input);
+        List<MathExpression> dbMathExpressions = repository.findByInput(numberInput);
 
         assertThat(dbMathExpressions).size().isEqualTo(1);
         MathExpression mathExpression = dbMathExpressions.get(0);
 
-        assertEquals(input,
+        assertEquals(numberInput,
                      mathExpression.getInput());
 
         assertEquals(22,
