@@ -1,4 +1,6 @@
-package calculations.integration;
+package calculations.integration.db;
+
+import calculations.controller.dto.ParticularOperationRequestDTO;
 
 import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
@@ -14,6 +16,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static calculations.model.calculator.CalculationAvailableOperations.SUM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class RestControllerDbIT {
 
-    private final String url = "/math/calculate/sum";
+    private final String url = "/math/calculate/particular";
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,8 +39,9 @@ public class RestControllerDbIT {
     @DataSet(cleanBefore = true, cleanAfter = true)
     public void checkSuccessfulCreation() throws Exception {
         //arrange
-        String input = "45463";
+        ParticularOperationRequestDTO requestDTO = new ParticularOperationRequestDTO("45463", SUM);
         ObjectMapper mapper = new ObjectMapper();
+        String input = mapper.writeValueAsString(requestDTO);
 
         //act
         mockMvc.perform(post(url).contentType(MediaType.APPLICATION_JSON)

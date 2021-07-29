@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static calculations.model.calculator.CalculationAvailableOperations.*;
-
 @RestController
 @ConditionalOnProperty(value = "console", havingValue = "false")
 @RequiredArgsConstructor

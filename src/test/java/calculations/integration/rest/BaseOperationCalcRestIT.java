@@ -1,4 +1,4 @@
-package calculations.integration;
+package calculations.integration.rest;
 
 import calculations.controller.dto.ParticularOperationRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;

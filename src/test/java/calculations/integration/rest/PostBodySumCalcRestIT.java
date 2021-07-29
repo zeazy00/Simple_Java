@@ -1,4 +1,4 @@
-package calculations.integration;
+package calculations.integration.rest;
 
 import calculations.controller.dto.OperationResultDTO;
 import calculations.controller.dto.ParticularOperationRequestDTO;
