@@ -28,13 +28,14 @@ import org.springframework.data.jpa.domain.Specification;
 
 @DBRider
 @SpringBootTest
+@EnablePostgresIntegrationTest
 public class RepositoryFiltrationIT {
 
     @Autowired
     private MathExpressionRepository repository;
 
-    @BeforeEach
-    @DataSet(cleanBefore = true, cleanAfter = true, value = "dbsets/filtration_db_test.json")
+//    @BeforeEach
+//    @DataSet(cleanBefore = true, cleanAfter = true, value = "dbsets/filtration_db_test.json")
     public void setUp() { }
 
     @Test
