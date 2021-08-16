@@ -1,4 +1,4 @@
-package calculations.integration;
+package calculations.integration.rest;
 
 import calculations.controller.dto.OperationResultDTO;
 import com.fasterxml.jackson.core.type.TypeReference;

@@ -3,6 +3,7 @@ package calculations.controller;
 import calculations.actions.allexecutor.AllCommandExecutor;
 import calculations.actions.particularexecutor.ParticularCommandExecutor;
 import calculations.controller.dto.OperationResultDTO;
+import calculations.controller.dto.ParticularOperationRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
@@ -27,27 +28,10 @@ public class CalculationRestController {
         return allCommandExecutor.executeAll(input);
     }
 
-    @PostMapping("sum")
+    @PostMapping("particular")
     @ResponseStatus(HttpStatus.CREATED)
-    public OperationResultDTO calculateSum(@RequestBody String input) {
-        return particularCommandExecutor.execute(SUM, input);
-    }
-
-    @PostMapping("avg")
-    @ResponseStatus(HttpStatus.CREATED)
-    public OperationResultDTO calculateAvg(@RequestBody String input) {
-        return particularCommandExecutor.execute(AVG, input);
-    }
-
-    @PostMapping("max")
-    @ResponseStatus(HttpStatus.CREATED)
-    public OperationResultDTO calculateMax(@RequestBody String input) {
-        return particularCommandExecutor.execute(MAX, input);
-    }
-
-    @PostMapping("min")
-    @ResponseStatus(HttpStatus.CREATED)
-    public OperationResultDTO calculateMin(@RequestBody String input) {
-        return particularCommandExecutor.execute(MIN, input);
+    public OperationResultDTO calculateParticular(@RequestBody ParticularOperationRequestDTO input) {
+        return particularCommandExecutor.execute(input.getOperation(),
+                                                 input.getNumberInput());
     }
 }
