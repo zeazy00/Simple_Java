@@ -16,6 +16,10 @@ import static calculations.model.calculator.CalculationAvailableOperations.SUM;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/*
+Проверка ответа сервера
+*/
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class PostBodySumCalcRestIT {

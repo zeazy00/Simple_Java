@@ -4,6 +4,7 @@ package calculations.integration.db;
 import calculations.controller.dto.filtration.HistorySearchOperation;
 import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
+import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.github.database.rider.core.api.configuration.Orthography.LOWERCASE;
 import static org.mockito.Mockito.mock;
 import static calculations.controller.dto.filtration.HistoryFiltrationOption.*;
 import static org.springframework.data.jpa.domain.Specification.where;
@@ -29,6 +31,7 @@ import org.springframework.data.jpa.domain.Specification;
 @DBRider
 @SpringBootTest
 @EnablePostgresIntegrationTest
+@DBUnit(cacheConnection = false, allowEmptyFields = true, leakHunter = true, caseInsensitiveStrategy = LOWERCASE)
 public class RepositoryFiltrationIT {
 
     @Autowired
