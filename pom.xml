@@ -66,6 +66,13 @@
 
         <dependency>
             <groupId>com.jupiter-tools</groupId>
+            <artifactId>spring-test-web</artifactId>
+            <version>0.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jupiter-tools</groupId>
             <artifactId>spring-test-postgres</artifactId>
             <version>0.4</version>
             <scope>test</scope>
@@ -78,20 +85,61 @@
             <scope>test</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-spring-web</artifactId>-->
-<!--            <version>3.0.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-boot-starter</artifactId>-->
-<!--            <version>3.0.0</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.springfox</groupId>-->
+        <!--            <artifactId>springfox-spring-web</artifactId>-->
+        <!--            <version>3.0.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.springfox</groupId>-->
+        <!--            <artifactId>springfox-boot-starter</artifactId>-->
+        <!--            <version>3.0.0</version>-->
+        <!--        </dependency>-->
 
     </dependencies>
 
     <build>
         <finalName>Simple_Java</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>com.querydsl</groupId>
+                            <artifactId>querydsl-apt</artifactId>
+                            <version>${querydsl.version}</version>
+                            <classifier>jpa</classifier>
+                        </path>
+                        <path>
+                            <groupId>javax.annotation</groupId>
+                            <artifactId>javax.annotation-api</artifactId>
+                            <version>${javax-annotation.version}</version>
+                        </path>
+                        <path>
+                            <groupId>javax.persistence</groupId>
+                            <artifactId>javax.persistence-api</artifactId>
+                            <version>${javax-persistence.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+<!--                    <compilerArgs>-->
+<!--                        &lt;!&ndash; задание компонентной модели для сгенерированных мапперов по-умолчанию &ndash;&gt;-->
+<!--                        <compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>-->
+<!--                        <arg>-Aquerydsl.entityAccessors=true</arg>-->
+<!--                        <arg>-Aquerydsl.useFields=false</arg>-->
+<!--                    </compilerArgs>-->
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

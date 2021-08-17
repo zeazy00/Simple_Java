@@ -5,11 +5,6 @@ import calculations.controller.dto.ParticularOperationRequestDTO;
 import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.database.rider.core.api.configuration.DBUnit;
-import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
-import com.jupiter.tools.spring.test.postgres.annotation.EnablePostgresTestContainers;
-import com.jupiter.tools.spring.test.postgres.annotation.meta.EnablePostgresIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static calculations.model.calculator.CalculationAvailableOperations.SUM;
-import static com.github.database.rider.core.api.configuration.Orthography.LOWERCASE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,9 +29,8 @@ Db entity creation test via Rest request
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@EnablePostgresTestContainers
-@DBRider
-@DBUnit(cacheConnection = false, allowEmptyFields = true, leakHunter = true, caseInsensitiveStrategy = LOWERCASE)
+//@EnablePostgresIntegrationTests
+//@EnableRestTests
 public class RestControllerDbIT {
 
     private final String url = "/math/calculate/particular";
@@ -49,7 +42,7 @@ public class RestControllerDbIT {
     private MathExpressionRepository repository;
 
     @Test
-    @DataSet(cleanBefore = true, cleanAfter = true)
+//    @DataSet(cleanBefore = true, cleanAfter = true)
     public void checkSuccessfulCreation() throws Exception {
         //arrange
         String numberInput = "45463";
