@@ -1,17 +1,16 @@
 package calculations.integration.db;
 
 import calculations.controller.dto.ParticularOperationRequestDTO;
-
 import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.database.rider.core.api.dataset.DataSet;
+import com.jupiter.tools.spring.test.postgres.annotation.meta.EnablePostgresIntegrationTest;
+import com.jupiter.tools.spring.test.web.annotation.EnableRestTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,10 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 Db entity creation test via Rest request
 */
 
-@SpringBootTest
-@AutoConfigureMockMvc
-//@EnablePostgresIntegrationTests
-//@EnableRestTests
+@EnableRestTest
+@EnablePostgresIntegrationTest
 public class RestControllerDbIT {
 
     private final String url = "/math/calculate/particular";
@@ -42,7 +39,7 @@ public class RestControllerDbIT {
     private MathExpressionRepository repository;
 
     @Test
-//    @DataSet(cleanBefore = true, cleanAfter = true)
+    @DataSet(cleanBefore = true, cleanAfter = true)
     public void checkSuccessfulCreation() throws Exception {
         //arrange
         String numberInput = "45463";
@@ -58,7 +55,7 @@ public class RestControllerDbIT {
 
         //assert
         List<MathExpression> allMathExpressions = repository.findAll();
-        assertThat(allMathExpressions).size().isEqualTo(2);
+        assertThat(allMathExpressions).size().isEqualTo(1);
 
         List<MathExpression> dbMathExpressions = repository.findByInput(numberInput);
 
