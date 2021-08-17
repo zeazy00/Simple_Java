@@ -3,7 +3,7 @@ package calculations.model.utils;
 public class DataValidation {
 
     public static boolean validateInput(String input) {
-        if (input == null || input.isBlank())
+        if (input == null || input.isEmpty())
             return false;
 
         for (int i = 0; i < input.length(); i++) {
