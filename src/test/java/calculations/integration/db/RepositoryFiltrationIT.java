@@ -30,6 +30,19 @@ public class RepositoryFiltrationIT {
 
     @Test
     @DataSet(cleanBefore = true, cleanAfter = true, value = "dbsets/filtration_db_test.json")
+    public void nullFilterTest(){
+        //arrange
+        Filtration filtration = null;
+
+        //act
+        List<MathExpression> result = repository.findAll(filtration);
+
+        //assert
+        assertThat(result).size().isEqualTo(8);
+    }
+
+    @Test
+    @DataSet(cleanBefore = true, cleanAfter = true, value = "dbsets/filtration_db_test.json")
     public void findEquatableByInput() {
 
         //arrange
