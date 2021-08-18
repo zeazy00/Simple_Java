@@ -10,7 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -35,7 +35,7 @@ public class MathExpression extends BaseEntity {
 
     @NotNull
     @Column(nullable = false, updatable = false)
-    LocalDateTime createDate;
+    LocalDate createDate;
 
     public MathExpression(String input,
                           CalculationAvailableOperations operation,
@@ -48,7 +48,7 @@ public class MathExpression extends BaseEntity {
 
     @PrePersist
     private void prePersist() {
-        createDate = LocalDateTime.now();
+        createDate = LocalDate.now();
     }
 
 }
