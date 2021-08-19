@@ -1,19 +1,31 @@
 package calculations.controller.dto;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.Objects;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class OperationResultDTO {
 
     String operationName;
 
     Integer result;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OperationResultDTO resultDTO = (OperationResultDTO) o;
+        return Objects.equals(operationName, resultDTO.operationName) && Objects.equals(result, resultDTO.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operationName, result);
+    }
 }
