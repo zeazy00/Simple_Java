@@ -6,13 +6,14 @@ import lombok.experimental.FieldDefaults;
 import java.util.Objects;
 
 @Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class OperationResultDTO {
 
-    String operationName;
+    String operation;
 
     Integer result;
 
@@ -21,11 +22,11 @@ public class OperationResultDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OperationResultDTO resultDTO = (OperationResultDTO) o;
-        return Objects.equals(operationName, resultDTO.operationName) && Objects.equals(result, resultDTO.result);
+        return Objects.equals(operation, resultDTO.operation) && Objects.equals(result, resultDTO.result);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operationName, result);
+        return Objects.hash(operation, result);
     }
 }

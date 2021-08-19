@@ -49,7 +49,7 @@ public class PostBodySumCalcRestIT {
         // assert
         OperationResultDTO resultDTO = mapper.readValue(jsonString, OperationResultDTO.class);
 
-        Assertions.assertEquals("Sum", resultDTO.getOperationName());
+        Assertions.assertEquals("Sum", resultDTO.getOperation());
         Assertions.assertEquals(34, resultDTO.getResult());
     }
 
