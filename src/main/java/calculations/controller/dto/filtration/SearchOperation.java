@@ -1,8 +1,7 @@
 package calculations.controller.dto.filtration;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /*
@@ -10,8 +9,8 @@ import lombok.experimental.FieldDefaults;
 с нужным HistoryFiltrationOption
  */
 @Getter
-@AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchOperation {
     String fieldName;
     HistoryFiltrationOption option;

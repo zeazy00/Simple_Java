@@ -60,12 +60,12 @@ public class Filtration implements Specification<MathExpression> {
     private Predicate lessThanDatePredicate(Root<MathExpression> root,
                                             CriteriaBuilder builder) {
         return builder.lessThan(root.get(operation.getFieldName()),
-                                (LocalDate) operation.getFieldValue());
+                                LocalDate.parse(operation.getFieldValue().toString()));
     }
 
     private Predicate greaterThenDatePredicate(Root<MathExpression> root,
                                                CriteriaBuilder builder) {
         return builder.greaterThan(root.get(operation.getFieldName()),
-                                   (LocalDate) operation.getFieldValue());
+                                   LocalDate.parse(operation.getFieldValue().toString()));
     }
 }

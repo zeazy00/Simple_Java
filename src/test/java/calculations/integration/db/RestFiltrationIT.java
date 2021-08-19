@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static calculations.controller.dto.filtration.FilterFields.*;
-import static calculations.controller.dto.filtration.HistoryFiltrationOption.CONTAINS;
-import static calculations.controller.dto.filtration.HistoryFiltrationOption.EQUALS;
+import static calculations.controller.dto.filtration.HistoryFiltrationOption.*;
 import static calculations.model.calculator.CalculationAvailableOperations.MAX;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -112,7 +111,7 @@ public class RestFiltrationIT {
     public void operationEqualsFiltration() throws Exception {
         //arrange
         SearchOperation[] filters = new SearchOperation[1];
-        filters[0] = new SearchOperation(OPERATION, EQUALS, MAX.getOpName());
+        filters[0] = new SearchOperation(OPERATION, EQUALS, MAX);
 
         ObjectMapper mapper = new ObjectMapper();
         String filterStr = mapper.writeValueAsString(filters);
@@ -129,7 +128,31 @@ public class RestFiltrationIT {
         List<OperationResultDTO> resultDTOS = mapper.readValue(resultJson, new TypeReference<List<OperationResultDTO>>() {});
         assertThat(resultDTOS).size().isEqualTo(4);
         assertThat(resultDTOS).extracting("operationName")
-                              .containsOnly(MAX.getOpName());
+                              .containsOnly(MAX);
+    }
+
+    @Test
+    @DataSet(cleanBefore = true, cleanAfter = true, value = "dbsets/filtration_db_test.json")
+    public void datesComplexFiltration() throws Exception {
+        //arrange
+        SearchOperation[] filters = new SearchOperation[2];
+        filters[0] = new SearchOperation(CREATE_DATE, GREATER_THAN, "2021-07-01");
+        filters[1] = new SearchOperation(CREATE_DATE, LESS_THAN, "2021-07-31");
+
+        ObjectMapper mapper = new ObjectMapper();
+        String filterStr = mapper.writeValueAsString(filters);
+
+        //act
+        String resultJson = mockMvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)
+                                                    .content(filterStr))
+                                   .andExpect(status().isOk())
+                                   .andReturn()
+                                   .getResponse()
+                                   .getContentAsString();
+
+        //assert
+        List<OperationResultDTO> resultDTOS = mapper.readValue(resultJson, new TypeReference<List<OperationResultDTO>>() {});
+        assertThat(resultDTOS).size().isEqualTo(5);
     }
 
 }
