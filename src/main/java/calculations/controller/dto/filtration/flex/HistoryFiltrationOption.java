@@ -1,4 +1,4 @@
-package calculations.controller.dto.filtration;
+package calculations.controller.dto.filtration.flex;
 
 /*
 Возможные операции фильтрации над данными

@@ -1,4 +1,4 @@
-package calculations.controller.dto.filtration;
+package calculations.controller.dto.filtration.flex;
 
 public class NotSupportedFilterException extends RuntimeException {
     public NotSupportedFilterException() {

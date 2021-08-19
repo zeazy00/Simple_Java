@@ -1,4 +1,4 @@
-package calculations.controller.dto.filtration;
+package calculations.controller.dto.filtration.flex;
 
 public enum FilterFields {
     CREATE_DATE("createDate"),

@@ -1,33 +1,34 @@
-package calculations.integration.db;
+package calculations.integration.db.filtration.flex;
 
 import calculations.controller.HistoryViewRestController;
-import calculations.controller.dto.FiltrationDTO;
 import calculations.controller.dto.OperationResultDTO;
-import calculations.controller.dto.filtration.SearchOperation;
+import calculations.controller.dto.filtration.flex.SearchOperation;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.jupiter.tools.spring.test.postgres.annotation.meta.EnablePostgresIntegrationTest;
 import com.jupiter.tools.spring.test.web.annotation.EnableRestTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static calculations.controller.dto.filtration.FilterFields.*;
-import static calculations.controller.dto.filtration.HistoryFiltrationOption.*;
+import static calculations.controller.dto.filtration.flex.FilterFields.*;
+import static calculations.controller.dto.filtration.flex.HistoryFiltrationOption.*;
 import static calculations.model.calculator.CalculationAvailableOperations.MAX;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled
 @EnableRestTest
 @EnablePostgresIntegrationTest
-public class RestFiltrationIT {
+public class RestMyFiltrationIT {
     private final String url = "/math/calculate/history";
 
     @Autowired

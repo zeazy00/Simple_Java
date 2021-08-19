@@ -1,6 +1,5 @@
-package calculations.controller.dto.filtration;
+package calculations.controller.dto.filtration.flex;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
