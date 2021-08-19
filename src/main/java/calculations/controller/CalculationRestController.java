@@ -16,19 +16,18 @@ import static calculations.model.calculator.CalculationAvailableOperations.*;
 @RestController
 @ConditionalOnProperty(value = "console", havingValue = "false")
 @RequiredArgsConstructor
-@RequestMapping("/math")
+@RequestMapping("/math/calculate")
 public class CalculationRestController {
 
     private final ParticularCommandExecutor particularCommandExecutor;
     private final AllCommandExecutor allCommandExecutor;
 
-    @PostMapping("calculate")
     @ResponseStatus(HttpStatus.CREATED)
     public List<OperationResultDTO> calculateAllByParam(@RequestParam String input) {
         return allCommandExecutor.executeAll(input);
     }
 
-    @PostMapping("calculate/particular")
+    @PostMapping("particular")
     @ResponseStatus(HttpStatus.CREATED)
     public OperationResultDTO calculateParticular(@RequestBody ParticularOperationRequestDTO input) {
         return particularCommandExecutor.execute(input.getOperation(),
