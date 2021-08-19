@@ -1,29 +1,32 @@
-package calculations.integration.db;
+package calculations.integration.db.filtration.flex;
 
 
-import calculations.controller.dto.filtration.Filtration;
-import calculations.controller.dto.filtration.NotSupportedFilterException;
-import calculations.controller.dto.filtration.SearchOperation;
+import calculations.controller.dto.filtration.flex.Filtration;
+import calculations.controller.dto.filtration.flex.NotSupportedFilterException;
+import calculations.controller.dto.filtration.flex.SearchOperation;
 import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.jupiter.tools.spring.test.postgres.annotation.meta.EnablePostgresDataTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static calculations.controller.dto.filtration.FilterFields.*;
-import static calculations.controller.dto.filtration.HistoryFiltrationOption.*;
+import static calculations.controller.dto.filtration.flex.FilterFields.*;
+import static calculations.controller.dto.filtration.flex.HistoryFiltrationOption.*;
 import static calculations.model.calculator.CalculationAvailableOperations.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Disabled
 @EnablePostgresDataTest
-public class RepositoryFiltrationIT {
+public class RepositoryMyFiltrationIT {
 
     @Autowired
     private MathExpressionRepository repository;

@@ -1,12 +1,13 @@
 package calculations.controller;
 
 import calculations.controller.dto.OperationResultDTO;
-import calculations.controller.dto.filtration.Filtration;
-import calculations.controller.dto.filtration.SearchOperation;
+import calculations.controller.dto.filtration.flex.Filtration;
+import calculations.controller.dto.filtration.flex.SearchOperation;
 import calculations.controller.dto.mappers.MathExpToOpResDTOMapper;
 import calculations.model.entity.MathExpression;
 import calculations.model.repository.MathExpressionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +17,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
+@ConditionalOnProperty(value = "complex-history", havingValue = "true")
 @RequestMapping("/math/calculate/history")
-public class HistoryViewRestController {
+public class ComplexHistoryViewRestController {
 
     private final MathExpressionRepository repository;
     private final MathExpToOpResDTOMapper mapper;
-
-//    @GetMapping
-//    public List<OperationResultDTO> getPage() {
-//
-//        return null;
-//    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

@@ -1,4 +1,4 @@
-package calculations.controller.dto.filtration;
+package calculations.controller.dto.filtration.flex;
 
 
 import calculations.model.calculator.CalculationAvailableOperations;
@@ -12,7 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 
-import static calculations.controller.dto.filtration.FilterFields.*;
+import static calculations.controller.dto.filtration.flex.FilterFields.*;
 
 @AllArgsConstructor
 public class Filtration implements Specification<MathExpression> {
