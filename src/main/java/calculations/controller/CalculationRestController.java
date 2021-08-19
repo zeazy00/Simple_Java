@@ -16,12 +16,13 @@ import static calculations.model.calculator.CalculationAvailableOperations.*;
 @RestController
 @ConditionalOnProperty(value = "console", havingValue = "false")
 @RequiredArgsConstructor
-@RequestMapping("/math/calculate")
+@RequestMapping("/math/calculate/")
 public class CalculationRestController {
 
     private final ParticularCommandExecutor particularCommandExecutor;
     private final AllCommandExecutor allCommandExecutor;
 
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public List<OperationResultDTO> calculateAllByParam(@RequestParam String input) {
         return allCommandExecutor.executeAll(input);
