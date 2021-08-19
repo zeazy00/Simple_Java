@@ -1,6 +1,7 @@
 package calculations.controller.dto.filtration;
 
 
+import calculations.model.calculator.CalculationAvailableOperations;
 import calculations.model.entity.MathExpression;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -25,8 +26,11 @@ public class Filtration implements Specification<MathExpression> {
 
         switch (operation.getOption()) {
             case EQUALS:
-                return builder.equal(root.get(operation.getFieldName()),
-                                     operation.getFieldValue());
+                if (operation.isFieldNameEquals(OPERATION))
+                    return operationEqualsPredicate(root, builder);
+                else
+                    return builder.equal(root.get(operation.getFieldName()),
+                                         operation.getFieldValue());
             case CONTAINS:
                 if (operation.isFieldNameEquals(INPUT))
                     return builder.like(root.get(operation.getFieldName()),
@@ -55,6 +59,14 @@ public class Filtration implements Specification<MathExpression> {
             default:
                 return null;
         }
+    }
+
+    private Predicate operationEqualsPredicate(Root<MathExpression> root, CriteriaBuilder builder) {
+        String enumName = operation.getFieldValue().toString();
+        CalculationAvailableOperations enumValue = CalculationAvailableOperations.valueOf(enumName);
+
+        return builder.equal(root.get(operation.getFieldName()),
+                             enumValue);
     }
 
     private Predicate lessThanDatePredicate(Root<MathExpression> root,

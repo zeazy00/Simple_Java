@@ -128,7 +128,7 @@ public class RestFiltrationIT {
         List<OperationResultDTO> resultDTOS = mapper.readValue(resultJson, new TypeReference<List<OperationResultDTO>>() {});
         assertThat(resultDTOS).size().isEqualTo(4);
         assertThat(resultDTOS).extracting("operationName")
-                              .containsOnly(MAX);
+                              .containsOnly(MAX.getOpName());
     }
 
     @Test

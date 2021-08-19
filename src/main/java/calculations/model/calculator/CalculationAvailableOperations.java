@@ -5,7 +5,6 @@ public enum CalculationAvailableOperations {
     private final String opName;
 
     CalculationAvailableOperations(String opName) {
-
         this.opName = opName;
     }
 
