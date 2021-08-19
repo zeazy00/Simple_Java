@@ -21,6 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class PostParamAllCalcRestIT {
 
+    private static final String url = "/math/calculate/";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -33,7 +35,7 @@ public class PostParamAllCalcRestIT {
 
 
         //Act & Assert
-        String jsonStringResult = mockMvc.perform(MockMvcRequestBuilders.post("/math/calculate")
+        String jsonStringResult = mockMvc.perform(MockMvcRequestBuilders.post(url)
                                                                         .param("input", input))
                                          .andExpect(status().isCreated())
                                          .andReturn()
