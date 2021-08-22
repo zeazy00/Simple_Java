@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 
 import static calculations.model.calculator.CalculationAvailableOperations.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,18 +40,18 @@ public class HistoryViewRestControllerIT {
             add("input", "123");
         }};
         List<OperationResultDTO> inputLikeExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.getOpName(), 6));
-            add(new OperationResultDTO(MIN.getOpName(), 1));
-            add(new OperationResultDTO(SUM.getOpName(), 21));
-            add(new OperationResultDTO(AVG.getOpName(), 3));
-            add(new OperationResultDTO(MAX.getOpName(), 6));
+            add(new OperationResultDTO(MAX.name(), 6));
+            add(new OperationResultDTO(MIN.name(), 1));
+            add(new OperationResultDTO(SUM.name(), 21));
+            add(new OperationResultDTO(AVG.name(), 3));
+            add(new OperationResultDTO(MAX.name(), 6));
         }};
 
         LinkedMultiValueMap<String, String> operationEqParams = new LinkedMultiValueMap<String, String>() {{
             add("operation", SUM.toString());
         }};
         List<OperationResultDTO> operationEqExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(SUM.getOpName(), 21));
+            add(new OperationResultDTO(SUM.name(), 21));
         }};
 
         LinkedMultiValueMap<String, String> dateFromParams = new LinkedMultiValueMap<String, String>() {{
@@ -60,9 +59,9 @@ public class HistoryViewRestControllerIT {
                                         .toString());
         }};
         List<OperationResultDTO> dateFromExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.getOpName(), 6));
-            add(new OperationResultDTO(MAX.getOpName(), 8));
-            add(new OperationResultDTO(MIN.getOpName(), 1));
+            add(new OperationResultDTO(MAX.name(), 6));
+            add(new OperationResultDTO(MAX.name(), 8));
+            add(new OperationResultDTO(MIN.name(), 1));
         }};
 
         LinkedMultiValueMap<String, String> julyDatesParams = new LinkedMultiValueMap<String, String>() {{
@@ -72,11 +71,11 @@ public class HistoryViewRestControllerIT {
                                       .toString());
         }};
         List<OperationResultDTO> julyDatesExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.getOpName(), 6));
-            add(new OperationResultDTO(MAX.getOpName(), 8));
-            add(new OperationResultDTO(MIN.getOpName(), 1));
-            add(new OperationResultDTO(MAX.getOpName(), 9));
-            add(new OperationResultDTO(SUM.getOpName(), 21));
+            add(new OperationResultDTO(MAX.name(), 6));
+            add(new OperationResultDTO(MAX.name(), 8));
+            add(new OperationResultDTO(MIN.name(), 1));
+            add(new OperationResultDTO(MAX.name(), 9));
+            add(new OperationResultDTO(SUM.name(), 21));
         }};
 
         LinkedMultiValueMap<String, String> fullFilter = new LinkedMultiValueMap<String, String>() {{
@@ -88,8 +87,8 @@ public class HistoryViewRestControllerIT {
                                       .toString());
         }};
         List<OperationResultDTO> fullExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.getOpName(), 8));
-            add(new OperationResultDTO(MAX.getOpName(), 9));
+            add(new OperationResultDTO(MAX.name(), 8));
+            add(new OperationResultDTO(MAX.name(), 9));
         }};
 
         return Stream.of(
