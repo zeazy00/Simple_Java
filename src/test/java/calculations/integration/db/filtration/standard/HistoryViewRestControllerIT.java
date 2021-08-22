@@ -130,7 +130,7 @@ public class HistoryViewRestControllerIT {
                                     .getContentAsString();
 
         //assert
-        List<HistoryDTO> resultDto = mapper.readValue(allDataJson, new TypeReference<List<HistoryDTO>>() {});
+        List resultDto = mapper.readValue(allDataJson, new TypeReference<List>() {});
         assertThat(resultDto).size().isEqualTo(8);
     }
 
