@@ -1,9 +1,10 @@
 package calculations.controller;
 
-import calculations.controller.dto.OperationResultDTO;
+import calculations.controller.dto.HistoryDTO;
 import calculations.controller.dto.filtration.standard.Filter;
 import calculations.controller.dto.filtration.standard.FiltrationArgs;
 import calculations.controller.dto.mappers.MathExpToOpResDTOMapper;
+import calculations.model.entity.MathExpression;
 import calculations.model.entity.QMathExpression;
 import calculations.model.repository.MathExpressionRepository;
 import com.querydsl.core.types.Predicate;
@@ -30,23 +31,23 @@ public class HistoryViewRestController {
     private final QMathExpression qMathExp = QMathExpression.mathExpression;
 
     @GetMapping
-    public List<OperationResultDTO> getAllHistory(@PageableDefault(size = PAGE_SIZE) Pageable pageable) {
-        return repository.findAll(pageable)
-                         .stream()
-                         .map(mapper::mathExpToOpRes)
-                         .collect(Collectors.toList());
+    public List<HistoryDTO> getAllHistory(@PageableDefault(size = PAGE_SIZE) Pageable pageable) {
+        List<MathExpression> expressions = repository.findAll(pageable).toList();
+        return expressions.stream()
+                          .map(mapper::mathExpToDTO)
+                          .collect(Collectors.toList());
     }
 
     @GetMapping("filter")
-    public List<OperationResultDTO> getFilteredHistory(@PageableDefault(size = PAGE_SIZE) Pageable pageable,
-                                                       FiltrationArgs filter) {
+    public List<HistoryDTO> getFilteredHistory(@PageableDefault(size = PAGE_SIZE) Pageable pageable,
+                                               FiltrationArgs filter) {
         if (filter == null)
             return getAllHistory(pageable);
 
-        List<OperationResultDTO> items = repository.findAll(getPredicateFromFilter(filter), pageable)
-                                                   .stream()
-                                                   .map(mapper::mathExpToOpRes)
-                                                   .collect(Collectors.toList());
+        List<MathExpression> expressions = repository.findAll(getPredicateFromFilter(filter), pageable).toList();
+        List<HistoryDTO> items = expressions.stream()
+                                            .map(mapper::mathExpToDTO)
+                                            .collect(Collectors.toList());
 
         return items;
     }

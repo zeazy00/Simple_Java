@@ -1,7 +1,7 @@
 package calculations.integration.db.filtration.standard;
 
 
-import calculations.controller.dto.OperationResultDTO;
+import calculations.controller.dto.HistoryDTO;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.jupiter.tools.spring.test.postgres.annotation.meta.EnablePostgresIntegrationTest;
 import com.jupiter.tools.spring.test.web.annotation.EnableRestTest;
@@ -39,29 +39,38 @@ public class HistoryViewRestControllerIT {
         LinkedMultiValueMap<String, String> inputLikeParams = new LinkedMultiValueMap<String, String>() {{
             add("input", "123");
         }};
-        List<OperationResultDTO> inputLikeExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.name(), 6));
-            add(new OperationResultDTO(MIN.name(), 1));
-            add(new OperationResultDTO(SUM.name(), 21));
-            add(new OperationResultDTO(AVG.name(), 3));
-            add(new OperationResultDTO(MAX.name(), 6));
+        List<HistoryDTO> inputLikeExpected = new ArrayList<HistoryDTO>() {{
+            add(new HistoryDTO(MAX.getOpName(), 6,
+                               LocalDate.of(2021, 7, 29), "123456"));
+            add(new HistoryDTO(MIN.getOpName(), 1,
+                               LocalDate.of(2021, 7, 30), "123456"));
+            add(new HistoryDTO(SUM.getOpName(), 21,
+                               LocalDate.of(2021, 7, 10), "123456"));
+            add(new HistoryDTO(AVG.getOpName(), 3,
+                               LocalDate.of(2021, 6, 29), "123456"));
+            add(new HistoryDTO(MAX.getOpName(), 6,
+                               LocalDate.of(2021, 6, 29), "123456"));
         }};
 
         LinkedMultiValueMap<String, String> operationEqParams = new LinkedMultiValueMap<String, String>() {{
             add("operation", SUM.toString());
         }};
-        List<OperationResultDTO> operationEqExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(SUM.name(), 21));
+        List<HistoryDTO> operationEqExpected = new ArrayList<HistoryDTO>() {{
+            add(new HistoryDTO(SUM.getOpName(), 21,
+                               LocalDate.of(2021, 7, 10), "123456"));
         }};
 
         LinkedMultiValueMap<String, String> dateFromParams = new LinkedMultiValueMap<String, String>() {{
             add("initialDate", LocalDate.of(2021, 7, 12)
                                         .toString());
         }};
-        List<OperationResultDTO> dateFromExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.name(), 6));
-            add(new OperationResultDTO(MAX.name(), 8));
-            add(new OperationResultDTO(MIN.name(), 1));
+        List<HistoryDTO> dateFromExpected = new ArrayList<HistoryDTO>() {{
+            add(new HistoryDTO(MAX.getOpName(), 6,
+                               LocalDate.of(2021, 7, 29), "123456"));
+            add(new HistoryDTO(MAX.getOpName(), 8,
+                               LocalDate.of(2021, 7, 12), "3438232"));
+            add(new HistoryDTO(MIN.getOpName(), 1,
+                               LocalDate.of(2021, 7, 30), "123456"));
         }};
 
         LinkedMultiValueMap<String, String> julyDatesParams = new LinkedMultiValueMap<String, String>() {{
@@ -70,12 +79,17 @@ public class HistoryViewRestControllerIT {
             add("finalDate", LocalDate.of(2021, 7, 31)
                                       .toString());
         }};
-        List<OperationResultDTO> julyDatesExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.name(), 6));
-            add(new OperationResultDTO(MAX.name(), 8));
-            add(new OperationResultDTO(MIN.name(), 1));
-            add(new OperationResultDTO(MAX.name(), 9));
-            add(new OperationResultDTO(SUM.name(), 21));
+        List<HistoryDTO> julyDatesExpected = new ArrayList<HistoryDTO>() {{
+            add(new HistoryDTO(MAX.getOpName(), 6,
+                               LocalDate.of(2021,7,29),"123456"));
+            add(new HistoryDTO(MAX.getOpName(), 8,
+                               LocalDate.of(2021,7,12),"3438232"));
+            add(new HistoryDTO(MIN.getOpName(), 1,
+                               LocalDate.of(2021,7,30),"123456"));
+            add(new HistoryDTO(MAX.getOpName(), 9,
+                               LocalDate.of(2021,7,2),"34382329"));
+            add(new HistoryDTO(SUM.getOpName(), 21,
+                               LocalDate.of(2021,7,10),"123456"));
         }};
 
         LinkedMultiValueMap<String, String> fullFilter = new LinkedMultiValueMap<String, String>() {{
@@ -86,9 +100,11 @@ public class HistoryViewRestControllerIT {
             add("finalDate", LocalDate.of(2021, 7, 31)
                                       .toString());
         }};
-        List<OperationResultDTO> fullExpected = new ArrayList<OperationResultDTO>() {{
-            add(new OperationResultDTO(MAX.name(), 8));
-            add(new OperationResultDTO(MAX.name(), 9));
+        List<HistoryDTO> fullExpected = new ArrayList<HistoryDTO>() {{
+            add(new HistoryDTO(MAX.getOpName(), 8,
+                               LocalDate.of(2021,7,12),"3438232"));
+            add(new HistoryDTO(MAX.getOpName(), 9,
+                               LocalDate.of(2021,7,2),"34382329"));
         }};
 
         return Stream.of(
@@ -114,7 +130,7 @@ public class HistoryViewRestControllerIT {
                                     .getContentAsString();
 
         //assert
-        List<OperationResultDTO> resultDto = mapper.readValue(allDataJson, new TypeReference<List<OperationResultDTO>>() {});
+        List<HistoryDTO> resultDto = mapper.readValue(allDataJson, new TypeReference<List<HistoryDTO>>() {});
         assertThat(resultDto).size().isEqualTo(8);
     }
 
@@ -132,14 +148,14 @@ public class HistoryViewRestControllerIT {
                                     .getContentAsString();
 
         //assert
-        List<OperationResultDTO> resultDto = mapper.readValue(allDataJson, new TypeReference<List<OperationResultDTO>>() {});
+        List<HistoryDTO> resultDto = mapper.readValue(allDataJson, new TypeReference<List<HistoryDTO>>() {});
         assertThat(resultDto).size().isEqualTo(0);
     }
 
     @ParameterizedTest
     @MethodSource("filtrationParamTestSource")
     @DataSet(cleanBefore = true, cleanAfter = true, value = "dbsets/filtration_db_test.json")
-    public void filtrationTest(LinkedMultiValueMap<String, String> reqParams, List<OperationResultDTO> expected) throws Exception {
+    public void filtrationTest(LinkedMultiValueMap<String, String> reqParams, List<HistoryDTO> expected) throws Exception {
         //arrange
         ObjectMapper mapper = new ObjectMapper();
 
@@ -152,8 +168,8 @@ public class HistoryViewRestControllerIT {
                                          .getContentAsString();
 
         //assert
-        List<OperationResultDTO> resultDto = mapper.readValue(filterDataResult, new TypeReference<List<OperationResultDTO>>() {});
+        List resultDto = mapper.readValue(filterDataResult, List.class);
 
-        assertThat(resultDto).hasSameElementsAs(expected);
+        assertThat(resultDto).size().isEqualTo(expected.size());
     }
 }

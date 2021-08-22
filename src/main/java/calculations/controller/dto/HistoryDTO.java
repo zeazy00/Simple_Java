@@ -2,6 +2,7 @@ package calculations.controller.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,7 +19,8 @@ public class HistoryDTO {
 
     Integer result;
 
-    LocalDate createdDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate createDate;
 
     String input;
 
@@ -29,12 +31,12 @@ public class HistoryDTO {
         HistoryDTO that = (HistoryDTO) o;
         return Objects.equals(operation, that.operation) &&
                Objects.equals(result, that.result) &&
-               Objects.equals(createdDate, that.createdDate) &&
+               Objects.equals(createDate, that.createDate) &&
                Objects.equals(input, that.input);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operation, result, createdDate, input);
+        return Objects.hash(operation, result, createDate, input);
     }
 }
